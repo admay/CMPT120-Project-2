@@ -16,7 +16,7 @@
         var west = false;
         function btn_onclick(btnNum) {
           if (btnNum === 1) {
-            var msg = "You are in the Kitchen and see the cookies so you eat them."
+            var msg = "You are in the Kitchen and see the cookies."
             updateText(msg);
               if (north === false) {
                 score = score + 5;
@@ -46,16 +46,18 @@
                         score = score + 5
                         }
                         west = true;
-                      } else
+                      } else {
                           if (btnNum === 5) {
                             alert(score);
                           } else {
                               alert("This should never happen");
                             }
-                    }
-                }
-            }
+                        }
+                  }
+              }
+          }
         }
+        
         function updateText(msg) {
           var ta = document.getElementById("taGame");
             ta.value = msg + '\n' + ta.value
