@@ -15,54 +15,52 @@
         var east = false;
         var west = false;
         function btn_onclick(btnNum) {
-          var msg = 0;
           if (btnNum === 1) {
-            msg = "You are in the Kitchen and see the cookies so you eat them."
+            var msg = "You are in the Kitchen and see the cookies."
+            updateText(msg);
               if (north === false) {
                 score = score + 5;
                 }
             north = true;
           } else {
               if (btnNum === 2) {
-                msg = "You just walked into the wall."
+                var msg = "You just walked into the wall."
+                updateText(msg);
                 if (south === false) {
                 score = score + 5;
                 }
                 south = true;
               } else {
                   if (btnNum === 3) {
-                    msg = "You are in the Closet. Comfy in there?"
+                    var msg = "You are in the Closet. Comfy in there?"
+                    updateText(msg);
                     if (east === false) {
                     score = score + 5;
                     }
                     east = true;
                   } else {
                       if (btnNum === 4) {
-                        msg = "You are in the bathroom."
+                        var msg = "You are in the bathroom."
+                        updateText(msg);
                         if (west === false) {
                         score = score + 5
                         }
                         west = true;
-                      } else
+                      } else {
                           if (btnNum === 5) {
                             alert(score);
                           } else {
                               alert("This should never happen");
                             }
-                    }
-                }
-            }
-          updateText(msg);
+                        }
+                  }
+              }
+          }
         }
         
         function updateText(msg) {
-          var ta = document.getElementById("taGameTextArea");
-          if (msg === 0) {
-            ta.value = ta.value
-          } else {
-              ta.value = msg + '\n\n' + ta.value
-            }
-          
+          var ta = document.getElementById("taGame");
+            ta.value = msg + '\n' + ta.value
         }                     
       </script>
       <style>
@@ -72,8 +70,11 @@
     <body>
       <b>VIDEO GAME! CHYEAH!!</b>
       <p>
-        Welcome to video game Operation Cookie, the game about getting cookies.</p>
-      <textarea id="taGameTextArea" rows="10" cols="40">You are in your bedroom with a hankering for cookies.
+        Welcome to video game, the game about something but I don't know
+        what it is just quite yet. You're in a place, with some stuff
+        and you have a mission to complete... So lets get to it.
+      </p>
+      <textarea id="taGame" rows="10" cols="40">You are in your bedroom with a hankering for cookies.
       </textarea>
       <p>
         <input type="button"
