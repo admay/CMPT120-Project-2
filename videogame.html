@@ -1,98 +1,184 @@
-<!DOCTYPE html>
 <html>
- <!-- Michael Zavarella
-      Introduction to Programming
-      Video Game Project Start
-      Version 0.2-->
-    <head>
-      <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-      <meta name="author"             content="Scooby Doo" />
-      <title>Video Game</title>
-      <script type="text/JavaScript">
-        var score = 0;
-        var north = false;
-        var south = false;
-        var east = false;
-        var west = false;
-        function btn_onclick(btnNum) {
-          var msg = 0;
-          if (btnNum === 1) {
-            msg = "You are in the Kitchen and see the cookies so you eat them."
-              if (north === false) {
-                score = score + 5;
-                }
-            north = true;
-          } else {
-              if (btnNum === 2) {
-                msg = "You just walked into the wall."
-                if (south === false) {
-                score = score + 5;
-                }
-                south = true;
-              } else {
-                  if (btnNum === 3) {
-                    msg = "You are in the Closet. Comfy in there?"
-                    if (east === false) {
-                    score = score + 5;
-                    }
-                    east = true;
-                  } else {
-                      if (btnNum === 4) {
-                        msg = "You are in the bathroom."
-                        if (west === false) {
-                        score = score + 5
-                        }
-                        west = true;
-                      } else
-                          if (btnNum === 5) {
-                            alert(score);
-                          } else {
-                              alert("This should never happen");
-                            }
-                    }
-                }
-            }
-          updateText(msg);
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="author"             content="Scooby Doo" />
+    <title>Videogame using Switch Case</title>
+    <script>
+      var score = 0; //initialize the score to zero
+      var userlocation = "bedroom" //initialize the user location to the bedroom
+      
+      function room_switch(room) {
+        switch(room) {
+          case "bedroom"      : var msg = "You are in your bedroom.";
+                              updateDisplay(msg);
+                              document.getElementById("btnNorth").style.visibility="visible";
+                              document.getElementById("btnSouth").style.visibility="visible";
+                              document.getElementById("btnEast").style.visibility="visible";
+                              document.getElementById("btnWest").style.visibility="visible"; 
+                              break;
+                              
+          case "NorthHallway" : var msg = "You are in the northern hallway."
+                              updateDisplay(msg);
+                              document.getElementById("btnNorth").style.visibility="visible";
+                              document.getElementById("btnSouth").style.visibility="visible";
+                              document.getElementById("btnEast").style.visibility="hidden";
+                              document.getElementById("btnWest").style.visibility="hidden";
+                              break;
+                              
+          case "Kitchen"      : var msg = "You are in the kitchen."
+                              updateDisplay(msg);
+                              document.getElementById("btnNorth").style.visibility="hidden";
+                              document.getElementById("btnSouth").style.visibility="visible";
+                              document.getElementById("btnEast").style.visibility="hidden";
+                              document.getElementById("btnWest").style.visibility="hidden"; 
+                              break;
+                              
+          case "SouthHallway" : var msg = "You are in the southern hallway."
+                              updateDisplay(msg);
+                              document.getElementById("btnNorth").style.visibility="visible";
+                              document.getElementById("btnSouth").style.visibility="hidden";
+                              document.getElementById("btnEast").style.visibility="hidden";
+                              document.getElementById("btnWest").style.visibility="hidden";
+                              break;
+                              
+          case "Bathroom"     : var msg = "You are in the bathroom."
+                              updateDisplay(msg);
+                              document.getElementById("btnNorth").style.visibility="hidden";
+                              document.getElementById("btnSouth").style.visibility="hidden";
+                              document.getElementById("btnEast").style.visibility="Visible";
+                              document.getElementById("btnWest").style.visibility="hidden";
+                              break;
+                              
+          case "LivingRoom"   : var msg = "You are in the living room."
+                              updateDisplay(msg);
+                              document.getElementById("btnNorth").style.visibility="hidden";
+                              document.getElementById("btnSouth").style.visibility="hidden";
+                              document.getElementById("btnEast").style.visibility="hidden";
+                              document.getElementById("btnWest").style.visibility="visible";
+                              break;
+          default          : var msg = "This should never happen."
+                              updateDisplay(msg);
+                              break;
         }
-        
-        function updateText(msg) {
-          var ta = document.getElementById("taGameTextArea");
-          if (msg === 0) {
-            ta.value = ta.value
-          } else {
-              ta.value = msg + '\n\n' + ta.value
-            }
+      }    
+      
+      function walk_north() {
+        if (userlocation === "bedroom") {
+          userlocation = "NorthHallway";
+          var room = "NorthHallway";
+          room_switch(room);
+        } else if (userlocation === "NorthHallway") {
+                userlocation = "Kitchen";
+                room_switch("Kitchen");
+              } else if (userlocation === "SouthHallway") {
+                        userlocation = "bedroom";
+                        room_switch("bedroom");
+                      }
+      } 
+
+      function walk_south() {
+        if (userlocation === "bedroom") {
+          userlocation = "SouthHallway"
+          room_switch("SouthHallway");
+        } else if (userlocation === "NorthHallway") {
+                  userlocation = "bedroom"
+                  room_switch("bedroom")
+                } else if (userlocation === "Kitchen") {
+                          userlocation = "NorthHallway"
+                          room_switch("NorthHallway");
+                        }
+      }
+
+      function walk_east() {
+        if (userlocation === "bedroom") {
+          userlocation = "LivingRoom";
+          room_switch("LivingRoom");
+          } else if (userlocation === "Bathroom") {
+                    userlocation = "bedroom";
+                    room_switch("bedroom");
+                  }
           
-        }                     
-      </script>
-      <style>
-        body {background-color:orange;}
-      </style>
-    </head>
-    <body>
-      <b>VIDEO GAME! CHYEAH!!</b>
-      <p>
-        Welcome to video game Operation Cookie, the game about getting cookies.</p>
-      <textarea id="taGameTextArea" rows="10" cols="40">You are in your bedroom with a hankering for cookies.
-      </textarea>
-      <p>
-        <input type="button"
-               value="North"
-               onclick="btn_onclick(1);">
-        <input type="button"
-               value="South"
-               onclick="btn_onclick(2);">
-        <br>
-        <input type="button"
-               value="East"
-               onclick="btn_onclick(3);">
-        <input type="button"
-               value="West"
-               onclick="btn_onclick(4);">
-        <input type="button"
-               value="Score"
-               onclick="btn_onclick(5);">
-      </p>
-    </body>
-    <a href="mailto:mzavarella30@gmail.com">Need some help?</a>
+      }
+
+      function walk_west() {
+        if (userlocation === "bedroom") {
+          userlocation = "Bathroom";
+          room_switch("Bathroom");
+        } else if (userlocation === "LivingRoom") {
+                  userlocation = "bedroom";
+                  room_switch("bedroom");
+                }
+      }
+
+      function updateDisplay(msg) {
+                var ta = document.getElementById("taGame");
+                ta.value = msg + '\n' + ta.value
+      }
+
+      function score_request() {
+        var msg = "Your current score is: " + score + " points";
+        updateDisplay(msg);
+      }
+      
+      function btn_do_action_click() {
+        var command = document.getElementById("taGameInput");
+        
+        if (command.value === "N" || command.value === "n") {
+          walk_north();
+          } else if (command.value === "S" || command.value === "s") {
+                    walk_south();
+                  } else if (command.value === "E" || command.value === "e") {
+                            walk_east();
+                          } else if (command.value === "W" || command.value === "w") {
+                                    walk_west();
+                                  } else {
+                                      var msg = "That command is invalid. Valid commands are N, n, S, s, E, e, W, and w";
+                                      updateDisplay(msg);
+                                    }
+      }
+    </script>
+    <style>
+      body {background-color:lightblue;}
+    </style>
+  </head>
+  <body>
+    <b>Video Game! CHYEAH!!<b>
+    <p>
+      Welcome to video game Operation Cookie. The game about getting cookies.</p>
+    </p>
+    <textarea rows = "10" cols = "60" id="taGame">You wake up in your bedroom with a hankering for some cookies.
+    </textarea>
+    <p>
+      <input type = "text" id = "taGameInput">
+      <input type = "button"
+             value = "Do Action!"
+             onclick = "btn_do_action_click();">
+    </p>
+    <p>
+      <input type="button" 
+             value="North" 
+             onclick="walk_north();" 
+             id="btnNorth">
+             
+      <input type="button" 
+             value="South" 
+             onclick="walk_south();" 
+             id="btnSouth">
+      <input type="button" 
+             value="East"   
+             onclick="walk_east();" 
+             id="btnEast">
+             
+      <input type="button" 
+             value="West" 
+             onclick="walk_west();" 
+             id="btnWest">
+               
+      <input type="button" 
+             value="Score" 
+             onclick="btn_score_click();"
+             id="btnScore">
+    </p>
+    
+  </body>
 </html>
