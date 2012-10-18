@@ -2,7 +2,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <meta name="author"             content="Scooby Doo" />
-    <title>Videogame using Switch Case</title>
+    <title>Videogame by Scooby Doo</title>
     <script>
       var score           = 0; //initialize the score to zero
       var userlocation    = "bedroom" //initialize the user location to the bedroom
@@ -13,6 +13,7 @@
       var scrBathroom     = false;
       var scrLivingRoom   = false;
       var scrSideYard     = false;
+      var scrDadsOffice   = false;
       // My big ass switch case stuff happening here
       function room_switch(room) {
         switch(room) {
@@ -40,7 +41,7 @@
                                break;
           case "Kitchen"      : var msg = "You are in the kitchen."
                                updateDisplay(msg);
-                               document.getElementById("btnNorth").style.visibility="hidden";
+                               document.getElementById("btnNorth").style.visibility="Visible";
                                document.getElementById("btnSouth").style.visibility="visible";
                                document.getElementById("btnEast").style.visibility="hidden";
                                document.getElementById("btnWest").style.visibility="visible"; 
@@ -93,6 +94,17 @@
                                  score = score + 5;
                                }
                                break;
+          case "DadsOffice"   : var msg = "You are in your dad's office."
+                               updateDisplay(msg);
+                               document.getElementById("btnNorth").style.visibility="hidden";
+                               document.getElementById("btnSouth").style.visibility="visible";
+                               document.getElementById("btnEast").style.visibility="hidden";
+                               document.getElementById("btnWest").style.visibility="hidden";
+                               if (scrDadsOffice === false) {
+                                scrDadsOffice = true;
+                                score = score + 5;
+                               }
+                               break;
           default             : var msg = "This should never happen."
                                updateDisplay(msg);
                                break;
@@ -109,7 +121,10 @@
               } else if (userlocation === "SouthHallway") {
                         userlocation = "bedroom";
                         room_switch("bedroom");
-                      }
+                      } else if (userlocation === "Kitchen") {
+                                userlocation = "DadsOffice";
+                                room_switch("DadsOffice");
+                              }
       } 
       function walk_south() {
         if (userlocation === "bedroom") {
@@ -121,7 +136,10 @@
                 } else if (userlocation === "Kitchen") {
                           userlocation = "NorthHallway"
                           room_switch("NorthHallway");
-                        }
+                        } else if (userlocation === "DadsOffice") {
+                                  userlocation = "Kitchen";
+                                  room_switch("Kitchen");
+                                }
       }
       function walk_east() {
         if (userlocation === "bedroom") {
@@ -155,21 +173,23 @@
         var msg = "Your current score is: " + score + " points";
         updateDisplay(msg);
       }
-      function btn_do_action_click() {
+      function btn_do_action_click(command) {
         var command = document.getElementById("taGameInput");
-        if (command.value === "N" || command.value === "n") {
-          walk_north();
-          } else if (command.value === "S" || command.value === "s") {
-                    walk_south();
-                  } else if (command.value === "E" || command.value === "e") {
-                            walk_east();
-                          } else if (command.value === "W" || command.value === "w") {
-                                    walk_west();
-                                  } else {
-                                      var msg = "That command is invalid. Valid commands are N, n, S, s, E, e, W, and w";
-                                      updateDisplay(msg);
-                                    }
+        switch(command.value) {
+          case "N": case "n": case "North": case "north": walk_north();
+            break;
+          case "S": case "s": case "South": case "south": walk_south();
+            break;
+          case "E": case "e": case "East" : case "east" :walk_east();
+            break;
+          case "W": case "w": case "West" : case "west" :walk_west();
+            break;
+          default : var msg = "That command is invalid. Please enter N, n, North, north, or any of the equivalants for the other cardinal directions."
+                     updateDisplay(msg);
+            break;
+        }
       }
+      
     </script>
     <style>
       body {background-color:lightblue;}
