@@ -4,64 +4,100 @@
     <meta name="author"             content="Scooby Doo" />
     <title>Videogame using Switch Case</title>
     <script>
-      var score = 0; //initialize the score to zero
-      var userlocation = "bedroom" //initialize the user location to the bedroom
-      
+      var score           = 0; //initialize the score to zero
+      var userlocation    = "bedroom" //initialize the user location to the bedroom
+      var scrbedroom      = false;
+      var scrNorthHallway = false;
+      var scrKitchen      = false;
+      var scrSouthHallway = false;
+      var scrBathroom     = false;
+      var scrLivingRoom   = false;
+      var scrSideYard     = false;
+      // My big ass switch case stuff happening here
       function room_switch(room) {
         switch(room) {
           case "bedroom"      : var msg = "You are in your bedroom.";
-                              updateDisplay(msg);
-                              document.getElementById("btnNorth").style.visibility="visible";
-                              document.getElementById("btnSouth").style.visibility="visible";
-                              document.getElementById("btnEast").style.visibility="visible";
-                              document.getElementById("btnWest").style.visibility="visible"; 
-                              break;
-                              
+                               updateDisplay(msg);
+                               document.getElementById("btnNorth").style.visibility="visible";
+                               document.getElementById("btnSouth").style.visibility="visible";
+                               document.getElementById("btnEast").style.visibility="visible";
+                               document.getElementById("btnWest").style.visibility="visible";
+                               /* if (scrbedroom === false) {
+                                  scrbedroom = true;
+                                  score = score + 5;
+                               } */ // I decided to not give the user points for the bedroom because it is the starting location. Im leaving the code in just in case I change my mind though.
+                               break;
           case "NorthHallway" : var msg = "You are in the northern hallway."
-                              updateDisplay(msg);
-                              document.getElementById("btnNorth").style.visibility="visible";
-                              document.getElementById("btnSouth").style.visibility="visible";
-                              document.getElementById("btnEast").style.visibility="hidden";
-                              document.getElementById("btnWest").style.visibility="hidden";
-                              break;
-                              
+                               updateDisplay(msg);
+                               document.getElementById("btnNorth").style.visibility="visible";
+                               document.getElementById("btnSouth").style.visibility="visible";
+                               document.getElementById("btnEast").style.visibility="hidden";
+                               document.getElementById("btnWest").style.visibility="hidden";
+                               if (scrNorthHallway === false) {
+                                scrNorthHallway = true;
+                                score = score + 5;
+                               }
+                               break;
           case "Kitchen"      : var msg = "You are in the kitchen."
-                              updateDisplay(msg);
-                              document.getElementById("btnNorth").style.visibility="hidden";
-                              document.getElementById("btnSouth").style.visibility="visible";
-                              document.getElementById("btnEast").style.visibility="hidden";
-                              document.getElementById("btnWest").style.visibility="hidden"; 
-                              break;
-                              
+                               updateDisplay(msg);
+                               document.getElementById("btnNorth").style.visibility="hidden";
+                               document.getElementById("btnSouth").style.visibility="visible";
+                               document.getElementById("btnEast").style.visibility="hidden";
+                               document.getElementById("btnWest").style.visibility="visible"; 
+                               if (scrKitchen === false) {
+                                scrKitchen = true;
+                                score = score + 5;
+                               }
+                               break;
           case "SouthHallway" : var msg = "You are in the southern hallway."
-                              updateDisplay(msg);
-                              document.getElementById("btnNorth").style.visibility="visible";
-                              document.getElementById("btnSouth").style.visibility="hidden";
-                              document.getElementById("btnEast").style.visibility="hidden";
-                              document.getElementById("btnWest").style.visibility="hidden";
-                              break;
-                              
+                               updateDisplay(msg);
+                               document.getElementById("btnNorth").style.visibility="visible";
+                               document.getElementById("btnSouth").style.visibility="hidden";
+                               document.getElementById("btnEast").style.visibility="hidden";
+                               document.getElementById("btnWest").style.visibility="hidden";
+                               if (scrSouthHallway === false) {
+                                scrSouthHallway = true;
+                                score = score + 5
+                               }
+                               break;
           case "Bathroom"     : var msg = "You are in the bathroom."
-                              updateDisplay(msg);
-                              document.getElementById("btnNorth").style.visibility="hidden";
-                              document.getElementById("btnSouth").style.visibility="hidden";
-                              document.getElementById("btnEast").style.visibility="Visible";
-                              document.getElementById("btnWest").style.visibility="hidden";
-                              break;
-                              
+                               updateDisplay(msg);
+                               document.getElementById("btnNorth").style.visibility="hidden";
+                               document.getElementById("btnSouth").style.visibility="hidden";
+                               document.getElementById("btnEast").style.visibility="Visible";
+                               document.getElementById("btnWest").style.visibility="hidden";
+                               if (scrBathroom === false) {
+                                scrBathroom = true;
+                                score = score + 5;
+                               }
+                               break;
           case "LivingRoom"   : var msg = "You are in the living room."
-                              updateDisplay(msg);
-                              document.getElementById("btnNorth").style.visibility="hidden";
-                              document.getElementById("btnSouth").style.visibility="hidden";
-                              document.getElementById("btnEast").style.visibility="hidden";
-                              document.getElementById("btnWest").style.visibility="visible";
-                              break;
-          default          : var msg = "This should never happen."
-                              updateDisplay(msg);
-                              break;
+                               updateDisplay(msg);
+                               document.getElementById("btnNorth").style.visibility="hidden";
+                               document.getElementById("btnSouth").style.visibility="hidden";
+                               document.getElementById("btnEast").style.visibility="hidden";
+                               document.getElementById("btnWest").style.visibility="visible";
+                               if (scrLivingRoom === false) {
+                                scrLivingRoom = true;
+                                score = score + 5;
+                               }
+                               break;
+          case "SideYard"     : var msg = "You are in the side yard."
+                               updateDisplay(msg);
+                               document.getElementById("btnNorth").style.visibility="hidden";
+                               document.getElementById("btnSouth").style.visibility="hidden";
+                               document.getElementById("btnEast").style.visibility="Visible";
+                               document.getElementById("btnWest").style.visibility="hidden";
+                               if (scrSideYard === false) {
+                                 scrSideYard = true;
+                                 score = score + 5;
+                               }
+                               break;
+          default             : var msg = "This should never happen."
+                               updateDisplay(msg);
+                               break;
         }
       }    
-      
       function walk_north() {
         if (userlocation === "bedroom") {
           userlocation = "NorthHallway";
@@ -75,7 +111,6 @@
                         room_switch("bedroom");
                       }
       } 
-
       function walk_south() {
         if (userlocation === "bedroom") {
           userlocation = "SouthHallway"
@@ -88,7 +123,6 @@
                           room_switch("NorthHallway");
                         }
       }
-
       function walk_east() {
         if (userlocation === "bedroom") {
           userlocation = "LivingRoom";
@@ -96,10 +130,11 @@
           } else if (userlocation === "Bathroom") {
                     userlocation = "bedroom";
                     room_switch("bedroom");
-                  }
-          
+                  } else if (userlocation === "SideYard") {
+                            userlocation = "Kitchen";
+                            room_switch("Kitchen");
+                          }         
       }
-
       function walk_west() {
         if (userlocation === "bedroom") {
           userlocation = "Bathroom";
@@ -107,22 +142,21 @@
         } else if (userlocation === "LivingRoom") {
                   userlocation = "bedroom";
                   room_switch("bedroom");
-                }
+                } else if (userlocation === "Kitchen") {
+                          userlocation = "SideYard";
+                          room_switch("SideYard");
+                        }
       }
-
       function updateDisplay(msg) {
                 var ta = document.getElementById("taGame");
                 ta.value = msg + '\n' + ta.value
       }
-
       function score_request() {
         var msg = "Your current score is: " + score + " points";
         updateDisplay(msg);
       }
-      
       function btn_do_action_click() {
         var command = document.getElementById("taGameInput");
-        
         if (command.value === "N" || command.value === "n") {
           walk_north();
           } else if (command.value === "S" || command.value === "s") {
@@ -159,26 +193,24 @@
              value="North" 
              onclick="walk_north();" 
              id="btnNorth">
-             
       <input type="button" 
              value="South" 
              onclick="walk_south();" 
              id="btnSouth">
       <input type="button" 
-             value="East"   
-             onclick="walk_east();" 
-             id="btnEast">
-             
-      <input type="button" 
              value="West" 
              onclick="walk_west();" 
              id="btnWest">
-               
+      <input type="button" 
+             value="East"   
+             onclick="walk_east();" 
+             id="btnEast">
       <input type="button" 
              value="Score" 
-             onclick="btn_score_click();"
+             onclick="score_request();"
              id="btnScore">
     </p>
-    
+    <br>
+    <a href="mailto:mzavarella30@gmail.com"> Mail-to link for assistance </a>
   </body>
 </html>
