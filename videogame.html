@@ -3,234 +3,53 @@
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <meta name="author"             content="Scooby Doo" />
     <title>Videogame by Scooby Doo</title>
-    <script>
-      var score           = 0; //initialize the score to zero
-      var userlocation    = "bedroom" //initialize the user location to the bedroom
-      var scrbedroom      = false;
-      var scrNorthHallway = false;
-      var scrKitchen      = false;
-      var scrSouthHallway = false;
-      var scrBathroom     = false;
-      var scrLivingRoom   = false;
-      var scrSideYard     = false;
-      var scrDadsOffice   = false;
-      // My big ass switch case stuff happening here
-      function room_switch(room) {
-        switch(room) {
-          case "bedroom"      : var msg = "You are in your bedroom.";
-                               updateDisplay(msg);
-                               document.getElementById("btnNorth").style.visibility="visible";
-                               document.getElementById("btnSouth").style.visibility="visible";
-                               document.getElementById("btnEast").style.visibility="visible";
-                               document.getElementById("btnWest").style.visibility="visible";
-                               /* if (scrbedroom === false) {
-                                  scrbedroom = true;
-                                  score = score + 5;
-                               } */ // I decided to not give the user points for the bedroom because it is the starting location. Im leaving the code in just in case I change my mind though.
-                               break;
-          case "NorthHallway" : var msg = "You are in the northern hallway."
-                               updateDisplay(msg);
-                               document.getElementById("btnNorth").style.visibility="visible";
-                               document.getElementById("btnSouth").style.visibility="visible";
-                               document.getElementById("btnEast").style.visibility="hidden";
-                               document.getElementById("btnWest").style.visibility="hidden";
-                               if (scrNorthHallway === false) {
-                                scrNorthHallway = true;
-                                score = score + 5;
-                               }
-                               break;
-          case "Kitchen"      : var msg = "You are in the kitchen."
-                               updateDisplay(msg);
-                               document.getElementById("btnNorth").style.visibility="Visible";
-                               document.getElementById("btnSouth").style.visibility="visible";
-                               document.getElementById("btnEast").style.visibility="hidden";
-                               document.getElementById("btnWest").style.visibility="visible"; 
-                               if (scrKitchen === false) {
-                                scrKitchen = true;
-                                score = score + 5;
-                               }
-                               break;
-          case "SouthHallway" : var msg = "You are in the southern hallway."
-                               updateDisplay(msg);
-                               document.getElementById("btnNorth").style.visibility="visible";
-                               document.getElementById("btnSouth").style.visibility="hidden";
-                               document.getElementById("btnEast").style.visibility="hidden";
-                               document.getElementById("btnWest").style.visibility="hidden";
-                               if (scrSouthHallway === false) {
-                                scrSouthHallway = true;
-                                score = score + 5
-                               }
-                               break;
-          case "Bathroom"     : var msg = "You are in the bathroom."
-                               updateDisplay(msg);
-                               document.getElementById("btnNorth").style.visibility="hidden";
-                               document.getElementById("btnSouth").style.visibility="hidden";
-                               document.getElementById("btnEast").style.visibility="Visible";
-                               document.getElementById("btnWest").style.visibility="hidden";
-                               if (scrBathroom === false) {
-                                scrBathroom = true;
-                                score = score + 5;
-                               }
-                               break;
-          case "LivingRoom"   : var msg = "You are in the living room."
-                               updateDisplay(msg);
-                               document.getElementById("btnNorth").style.visibility="hidden";
-                               document.getElementById("btnSouth").style.visibility="hidden";
-                               document.getElementById("btnEast").style.visibility="hidden";
-                               document.getElementById("btnWest").style.visibility="visible";
-                               if (scrLivingRoom === false) {
-                                scrLivingRoom = true;
-                                score = score + 5;
-                               }
-                               break;
-          case "SideYard"     : var msg = "You are in the side yard."
-                               updateDisplay(msg);
-                               document.getElementById("btnNorth").style.visibility="hidden";
-                               document.getElementById("btnSouth").style.visibility="hidden";
-                               document.getElementById("btnEast").style.visibility="Visible";
-                               document.getElementById("btnWest").style.visibility="hidden";
-                               if (scrSideYard === false) {
-                                 scrSideYard = true;
-                                 score = score + 5;
-                               }
-                               break;
-          case "DadsOffice"   : var msg = "You are in your dad's office."
-                               updateDisplay(msg);
-                               document.getElementById("btnNorth").style.visibility="hidden";
-                               document.getElementById("btnSouth").style.visibility="visible";
-                               document.getElementById("btnEast").style.visibility="hidden";
-                               document.getElementById("btnWest").style.visibility="hidden";
-                               if (scrDadsOffice === false) {
-                                scrDadsOffice = true;
-                                score = score + 5;
-                               }
-                               break;
-          default             : var msg = "This should never happen."
-                               updateDisplay(msg);
-                               break;
-        }
-      }    
-      function walk_north() {
-        if (userlocation === "bedroom") {
-          userlocation = "NorthHallway";
-          var room = "NorthHallway";
-          room_switch(room);
-        } else if (userlocation === "NorthHallway") {
-                userlocation = "Kitchen";
-                room_switch("Kitchen");
-              } else if (userlocation === "SouthHallway") {
-                        userlocation = "bedroom";
-                        room_switch("bedroom");
-                      } else if (userlocation === "Kitchen") {
-                                userlocation = "DadsOffice";
-                                room_switch("DadsOffice");
-                              }
-      } 
-      function walk_south() {
-        if (userlocation === "bedroom") {
-          userlocation = "SouthHallway"
-          room_switch("SouthHallway");
-        } else if (userlocation === "NorthHallway") {
-                  userlocation = "bedroom"
-                  room_switch("bedroom")
-                } else if (userlocation === "Kitchen") {
-                          userlocation = "NorthHallway"
-                          room_switch("NorthHallway");
-                        } else if (userlocation === "DadsOffice") {
-                                  userlocation = "Kitchen";
-                                  room_switch("Kitchen");
-                                }
-      }
-      function walk_east() {
-        if (userlocation === "bedroom") {
-          userlocation = "LivingRoom";
-          room_switch("LivingRoom");
-          } else if (userlocation === "Bathroom") {
-                    userlocation = "bedroom";
-                    room_switch("bedroom");
-                  } else if (userlocation === "SideYard") {
-                            userlocation = "Kitchen";
-                            room_switch("Kitchen");
-                          }         
-      }
-      function walk_west() {
-        if (userlocation === "bedroom") {
-          userlocation = "Bathroom";
-          room_switch("Bathroom");
-        } else if (userlocation === "LivingRoom") {
-                  userlocation = "bedroom";
-                  room_switch("bedroom");
-                } else if (userlocation === "Kitchen") {
-                          userlocation = "SideYard";
-                          room_switch("SideYard");
-                        }
-      }
-      function updateDisplay(msg) {
-                var ta = document.getElementById("taGame");
-                ta.value = msg + '\n' + ta.value
-      }
-      function score_request() {
-        var msg = "Your current score is: " + score + " points";
-        updateDisplay(msg);
-      }
-      function btn_do_action_click(command) {
-        var command = document.getElementById("taGameInput");
-        switch(command.value) {
-          case "N": case "n": case "North": case "north": walk_north();
-            break;
-          case "S": case "s": case "South": case "south": walk_south();
-            break;
-          case "E": case "e": case "East" : case "east" :walk_east();
-            break;
-          case "W": case "w": case "West" : case "west" :walk_west();
-            break;
-          default : var msg = "That command is invalid. Please enter N, n, North, north, or any of the equivalants for the other cardinal directions."
-                     updateDisplay(msg);
-            break;
-        }
-      }
-      
-    </script>
-    <style>
-      body {background-color:lightblue;}
-    </style>
+    <link rel="stylesheet" href="videogame.css" type="text/css" media="screen" />
   </head>
   <body>
+    <script type="text/javascript" src="videogame.js"></script>
     <b>Video Game! CHYEAH!!<b>
     <p>
       Welcome to video game Operation Cookie. The game about getting cookies.</p>
     </p>
-    <textarea rows = "10" cols = "60" id="taGame">You wake up in your bedroom with a hankering for some cookies.
-    </textarea>
+      <textarea  id="taGame">You wake up in your bedroom with a hankering for some cookies.
+      </textarea>
     <p>
-      <input type = "text" id = "taGameInput">
+      <input type = "text" 
+             id = "taGameInput" 
+             class="InputStyleOne">
       <input type = "button"
              value = "Do Action!"
-             onclick = "btn_do_action_click();">
+             onclick = "btn_do_action_click();"
+             class="BtnStyleTwo">
     </p>
     <p>
       <input type="button" 
              value="North" 
              onclick="walk_north();" 
-             id="btnNorth">
+             id="btnNorth"
+             class="BtnStyleOne">
       <input type="button" 
              value="South" 
              onclick="walk_south();" 
-             id="btnSouth">
+             id="btnSouth"
+             class="BtnStyleOne">
       <input type="button" 
              value="West" 
              onclick="walk_west();" 
-             id="btnWest">
+             id="btnWest"
+             class="BtnStyleOne">
       <input type="button" 
              value="East"   
              onclick="walk_east();" 
-             id="btnEast">
+             id="btnEast"
+             class="BtnStyleOne">
       <input type="button" 
              value="Score" 
              onclick="score_request();"
-             id="btnScore">
+             id="btnScore"
+             class="BtnStyleOne">
     </p>
     <br>
-    <a href="mailto:mzavarella30@gmail.com"> Mail-to link for assistance </a>
+    <a class="MailToLink" href="mailto:mzavarella30@gmail.com"> Mail-to link for assistance </a>
   </body>
 </html>

@@ -1,0 +1,52 @@
+/* videogame.css */
+
+body {
+  text-align:center;
+  background-color:lightblue;
+  color:brown;
+  font-family:papyrus;
+  font-size:20;
+  font-weight:bold;
+}
+
+textarea#taGame {
+  width:650px;
+  height:350px;
+  background-color:lightblue;
+  color:brown;
+  font-family:papyrus;
+  font-size:16px;
+  font-weight:bold;
+}
+
+.MailToLink {
+  color:Brown;
+}
+
+.BtnStyleOne {
+  width:50px;
+  height:25px;
+  background-color:lightblue;
+  border-color:brown;
+  color:brown;
+  font-family:papyrus;
+}
+
+.BtnStyleTwo {
+  width:100px;
+  height:25px;
+  background-color:lightblue;
+  border-color:brown;
+  color:brown;
+  font-family:papyrus;
+}
+
+.InputStyleOne {
+  width:162px;
+  height:25px;
+  border-color:Brown;
+  color:brown;
+  font-family:papyrus;
+  font-weight:bold;
+
+} 
