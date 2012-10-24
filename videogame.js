@@ -228,6 +228,10 @@ function score_request() {
   var msg = "Your current score is: " + score + " points";
   updateDisplay(msg);
 }
+function help_command() {
+  var msg = "The valid inputs are: Help, Score, N, n, North, north, or any of the equivilants for the other cardinal direction.";
+  updateDisplay(msg);
+}
 function btn_do_action_click(command) {
   var command = document.getElementById("taGameInput");
   switch(command.value) {
@@ -242,8 +246,14 @@ function btn_do_action_click(command) {
     case "score" : var msg = "Your current score is: " + score + " points";
                    updateDisplay(msg);
                    break;
+    case"help" : case "Help" : case "I need help" : help_command();
+                                                     break;
     default : var msg = "That command is invalid. Please enter N, n, North, north, or any of the equivalants for the other cardinal directions."
               updateDisplay(msg);
               break;
   }
+}
+function init() {
+  var msg = "You wake up in your bedroom with the hankering for some cookies."
+  updateDisplay(msg);
 }

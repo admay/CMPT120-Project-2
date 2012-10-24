@@ -13,41 +13,33 @@
     </p>
       <textarea  id="taGame">You wake up in your bedroom with a hankering for some cookies.
       </textarea>
+      <textarea id="taGameMap">      o
+      |
+o-o-o
+      |
+      o
+      |
+      o-X-o
+      |
+      o
+      |
+         o-o
+   
+KEY:
+X = starting location
+o = available locations
+| = pathways
+</textarea>
     <p>
-      <input type = "text" 
-             id = "taGameInput" 
-             class="InputStyleOne">
-      <input type = "button"
-             value = "Do Action!"
-             onclick = "btn_do_action_click();"
-             class="BtnStyleTwo">
+      <input type = "text" onfocus="if(this.value == 'Enter Commands here') { this.value = '';}" value="Enter Commands here" id = "taGameInput" class="InputStyleOne">
+      <input type = "button" value = "Do Action!" onclick = "btn_do_action_click();" yclass="BtnStyleTwo">
     </p>
     <p>
-      <input type="button" 
-             value="North" 
-             onclick="walk_north();" 
-             id="btnNorth"
-             class="BtnStyleOne">
-      <input type="button" 
-             value="South" 
-             onclick="walk_south();" 
-             id="btnSouth"
-             class="BtnStyleOne">
-      <input type="button" 
-             value="West" 
-             onclick="walk_west();" 
-             id="btnWest"
-             class="BtnStyleOne">
-      <input type="button" 
-             value="East"   
-             onclick="walk_east();" 
-             id="btnEast"
-             class="BtnStyleOne">
-      <input type="button" 
-             value="Score" 
-             onclick="score_request();"
-             id="btnScore"
-             class="BtnStyleOne">
+      <input type="button" value="North" onclick="walk_north();"    id="btnNorth" class="BtnStyleOne">
+      <input type="button" value="South" onclick="walk_south();"    id="btnSouth" class="BtnStyleOne">
+      <input type="button" value="West"  onclick="walk_west();"     id="btnWest"  class="BtnStyleOne">
+      <input type="button" value="East"  onclick="walk_east();"     id="btnEast"  class="BtnStyleOne">
+      <input type="button" value="Score" onclick="score_request();" id="btnScore" class="BtnStyleOne">
     </p>
     <br>
     <a class="MailToLink" href="mailto:mzavarella30@gmail.com"> Mail-to link for assistance </a>
