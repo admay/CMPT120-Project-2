@@ -1,20 +1,21 @@
 /* videogame.css */
+/*   By Scooby Doo */
 
 body {
-  text-align:center;
+  text-align:left;
   background-color:lightblue;
   color:brown;
-  font-family:papyrus,calibri,sans-serif;
+  font-family:calibri,sans-serif;
   font-size:20;
   font-weight:bold;
 }
-
 textarea#taGame {
   text-align:center;
   width:650px;
   height:350px;
   background-color:lightblue;
   color:brown;
+  border:;
   font-family:calibri,sans-serif;
   font-size:16px;
   font-weight:bold;
@@ -22,43 +23,46 @@ textarea#taGame {
 
 textarea#taGameMap {
   text-align:center;
-  width:250px;
+  width:160px;
   height:350px;
   background-color:lightblue;
   color:brown;
   font-family:calibri,sans-serif;
-  font-size:16px;
+  font-size:15px;
   font-weight:bold;
 }
 .MailToLink {
   color:Brown;
 }
-
 .BtnStyleOne {
   width:50px;
   height:25px;
   background-color:pink;
+  border-width:1px;
   border-color:brown;
   color:brown;
-  font-family:papyrus,calibri,sans-serif;
+  font-family:calibri,sans-serif;
+  font-weight:bold;
 }
 
 .BtnStyleTwo {
   width:100px;
   height:25px;
   background-color:pink;
+  border-width:1px;
   border-color:brown;
   color:brown;
-  font-family:papyrus,calibri,sans-serif;
+  font-family:calibri,sans-serif;
+  font-weight:bold;
 }
 
 .InputStyleOne {
-  width:162px;
+  width:450px;
   height:25px;
   background-color:pink;
+  border-width:1px;
   border-color:Brown;
   color:brown;
-  font-family:papyrus,calibri,sans-serif;
+  font-family:calibri,sans-serif;
   font-weight:bold;
-
 } 
