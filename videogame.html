@@ -2,22 +2,21 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <meta name="author"             content="Scooby Doo" />
-    <title>Videogame by Scooby Doo</title>
+    <title>Hoobafarba</title>
     <link rel="stylesheet" href="videogame.css" type="text/css" media="screen" />
   </head>
-  <body onload="init()">
+  <body onload="init();" class="body">
     <script type="text/javascript" src="videogame.js"></script>
-    <script type="text/javascript" src="gamemap.js"></script>
     <b>Video Game! CHYEAH!!<b>
     <p>
       Welcome to video game Operation Cookie. The game about getting cookies.</p>
     </p>
-      <textarea id="taGame">
+      <textarea id="taGame" class="taGame">
       </textarea>
-      <textarea id="taGameMap">
+      <textarea id="taGameMap" class="taGameMap">
       </textarea>
     <p>
-      <input type = "text" id = "taGameInput" class="InputStyleOne" autocomplete="off">
+      <input type = "text" id = "taGameInput" class="Input" autocomplete="off">
       <input type = "button" value = "Do Action!" onclick = "btn_do_action_click();" class="BtnStyleTwo">
     </p>
     <p>
@@ -25,10 +24,9 @@
       <input type="button" value="South" onclick="walk_south();"    id="btnSouth" class="BtnStyleOne">
       <input type="button" value="West"  onclick="walk_west();"     id="btnWest"  class="BtnStyleOne">
       <input type="button" value="East"  onclick="walk_east();"     id="btnEast"  class="BtnStyleOne">
-      <input type="button" value="Score" onclick="score_request();" id="btnScore" class="BtnStyleOne">
-      <input type="button" value="Map"   onclick="updateMap();"     id="btnMap"   class="BtnStyleOne">  
+      <input type="button" value="Score" onclick="score_request();" id="btnScore" class="BtnStyleOne">  
     </p>
     <br>
     <a class="MailToLink" href="mailto:mzavarella30@gmail.com"> Mail-to link for assistance </a>
-  </body>
+	</body>
 </html>

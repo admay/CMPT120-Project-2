@@ -1,46 +1,48 @@
 /* videogame.css */
-/*   By Scooby Doo */
+/* By Scooby Doo */
 
-body {
+.body {
   text-align:left;
-  background-color:lightblue;
-  color:brown;
+  background:url("http://www.grubgrade.com/wp-content/uploads/2009/09/Cookie-Monster-Binge.jpg");
+  background-repeat:no-repeat;
+  background-position:100% 100%;
+  background-color:2B579E;
+  color:white;
   font-family:calibri,sans-serif;
   font-size:20;
   font-weight:bold;
 }
-textarea#taGame {
+.taGame {
   text-align:center;
-  width:650px;
-  height:350px;
-  background-color:lightblue;
-  color:brown;
-  border:;
+  width:52%;
+  height:60%;
+  background-color:DAECFF;
+  color:black;
   font-family:calibri,sans-serif;
   font-size:16px;
   font-weight:bold;
 }
 
-textarea#taGameMap {
+.taGameMap {
   text-align:center;
-  width:160px;
-  height:350px;
-  background-color:lightblue;
-  color:brown;
+  width:150px;
+  height:60%;
+  background-color:DAECFF;
+  color:black;
   font-family:calibri,sans-serif;
   font-size:15px;
   font-weight:bold;
 }
 .MailToLink {
-  color:Brown;
+  color:white;
 }
 .BtnStyleOne {
   width:50px;
   height:25px;
-  background-color:pink;
+  background-color:DAECFF;
   border-width:1px;
-  border-color:brown;
-  color:brown;
+  border-color:black;
+  color:black;
   font-family:calibri,sans-serif;
   font-weight:bold;
 }
@@ -48,21 +50,21 @@ textarea#taGameMap {
 .BtnStyleTwo {
   width:100px;
   height:25px;
-  background-color:pink;
+  background-color:DAECFF;
   border-width:1px;
-  border-color:brown;
-  color:brown;
+  border-color:black;
+  color:black;
   font-family:calibri,sans-serif;
   font-weight:bold;
 }
 
-.InputStyleOne {
-  width:450px;
+.Input {
+  width:52%;
   height:25px;
-  background-color:pink;
+  background-color:DAECFF;
   border-width:1px;
-  border-color:Brown;
-  color:brown;
+  border-color:black;
+  color:black;
   font-family:calibri,sans-serif;
   font-weight:bold;
 } 
