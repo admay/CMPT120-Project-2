@@ -15,7 +15,7 @@
 .taGame {
   text-align:center;
   width:52%;
-  height:60%;
+  height:57%;
   background-color:DAECFF;
   color:black;
   font-family:calibri,sans-serif;
@@ -26,15 +26,16 @@
 .taGameMap {
   text-align:center;
   width:150px;
-  height:60%;
+  height:57%;
   background-color:DAECFF;
   color:black;
   font-family:calibri,sans-serif;
   font-size:15px;
   font-weight:bold;
 }
-.MailToLink {
+.Hyperlinks {
   color:white;
+  font-size:14px;
 }
 .BtnStyleOne {
   width:50px;

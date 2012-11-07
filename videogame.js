@@ -1,6 +1,7 @@
 var score           = 0; //initialize the score to zero
-var userlocation    = "bedroom" //initialize the user location to the bedroom
-// Score Variables ... fuck lawlz
+var userlocation    = "bedroom"; //initialize the user location to the bedroom
+var userMoves       = 0;
+// Score Variables
 var scrHallwayA     = false;
 var scrSisterRoom   = false;
 var scrBathroomA    = false;
@@ -20,269 +21,238 @@ var scrStore        = false;
 var scrRegister     = false;
 var scrShelves      = false; 
 // Object Variables
-var keys            = false; //to pick up the keys
-var chores          = false; //to do your chores
-var money           = false; //to pick up the money
-var cookies         = false; //to take the cookies off of the shelf
-var payment         = false; //to pay for the cookies
+var keys            = false; // to pick up the keys
+var chores          = false; // to do your chores
+var money           = false; // to pick up the money
+var cookies         = false; // to take the cookies off of the shelf
+var payment         = false; // to pay for the cookies
+var dancebattle     = false; // to escape from the ninja den guarded by the grue
+var userBreathing   = true;  // has the user been eaten by anything yet?
 
-// set up dance battle with the evil dance ninjas, fight the pirates, something with harry potter...
-// learn how to embed music and play on command
-
-// My big ass switch case stuff happening here
-function room_switch(room) {
-	switch(room) {
-		case "bedroom"      : if (chores === false) { 
-								var msg = "You are in your bedroom, its pretty damn messy.";
-								updateDisplay(msg);
-							  } else if (chores === true) {
-									   var msg = "You are in your much cleaner room, maybe your parents will let you leave now.";
-									   updateDisplay(msg);
-									 } else if ((chores === true) && (money === true)) {
-												var msg = "You are in your nice, clean room."
-												updateDisplay(msg);
-											} else {
-												var msg = "This should never happen.";
-												updateDisplay(msg);
-											  }   
-							document.getElementById("btnNorth").style.visibility="hidden";
-							document.getElementById("btnSouth").style.visibility="visible";
-							document.getElementById("btnEast").style.visibility="hidden";
-							document.getElementById("btnWest").style.visibility="hidden";
-							break;
-		case "HallwayA" 	: var msg = "You are at the beginning of the hallway, to the south is the end of the hallway and the kitchen."
-							updateDisplay(msg);
-							document.getElementById("btnNorth").style.visibility="visible";
-							document.getElementById("btnSouth").style.visibility="visible";
-							document.getElementById("btnEast").style.visibility="visible";
-							document.getElementById("btnWest").style.visibility="visible";
-							if (scrHallwayA === false) {
-								scrHallwayA = true;
-								score = score + 5;
+function updateDisplay(msg) {
+	var display = document.getElementById("taGame");
+	display.value = msg + '\n' + display.value
+}
+function loadMap() {
+	var map = "O" + "\n" + "|" + "\n" + "O-O-O" + "\n" + "|"+ "\n"  + "     O-O-O  O-O-O" + "\n" + "    |   |" + "\n" + "   O-O-O-O" + "\n" + "|" + "\n" + "O" + "\n" + "|" + "\n" + "O" + "\n" + "|" + "\n" + "." + "\n" + "." + "\n" + "." + "\n" + "|" + "\n" + "    O-O" + "\n" + "|" + "\n" + "O" 
+	mapdisplay = document.getElementById("taGameMap");
+	mapdisplay.value = map;
+}
+function init() {
+	var msg = "You wake up in your bedroom with the hankering for some cookies. And by the way your room is looking a little bit messy, you might want to do your chores sometime or else your parents might get mad."
+	updateDisplay(msg);
+	button_switch(1);
+	loadMap();
+}
+function gameWinFunction() {
+	var msg = "CONGRADULATIONS!!! You won Hoobafarba and in only " + userMoves + " moves!"
+}
+function btn_do_action_click(command) {
+	var command = document.getElementById("taGameInput");
+	if (userBreathing === false) {
+		var msg = "You're dead, refresh the page and try again.";
+		updateDisplay(msg);
+	} else {
+		switch(command.value) {
+			case "N"    : case "n"    : case "North": case "north": walk_north();
+																   break;
+			case "S"    : case "s"    : case "South": case "south": walk_south();
+																   break;
+			case "E"    : case "e"    : case "East" : case "east" :walk_east();
+																   break;
+			case "W"    : case "w"    : case "West" : case "west" :walk_west();
+																   break;
+			case "score"     : var msg = "Your current score is: " + score + " points";
+						       updateDisplay(msg);
+						       break;
+			case "help"      : case "Help" : case "I need help" : case "i need help" : case "help me" : user_help();
+														                                                break;
+			case "take keys"  : case "Take keys" : if (keys === true) {
+													  var msg = "You already have them";
+	       											  updateDisplay(msg);
+												   } else if (keys === false); {
+															special_commands("keys");
+														  }
+												  break;
+			case "do chores"  : case "clean room" : case "clean up" : case "clean" : if (chores === false) { 
+																					    special_commands("chores");
+																					    } else if (chores === false) {
+																								var msg = "Your room is already clean";
+																								updateDisplay(msg);
+																								}
+							                                        				 break;
+			case "take money" : case "take cash" : case "Take money" : case "Take cash" : if (money === false ) {
+																							special_commands("money");
+																						  } else if (money === true) {
+																									var msg = "You already have the money."
+																								 }
+																						 break;
+			case "take cookies" : case "find cookies" : case "grab cookies" : if (cookies === false) { 
+																				special_commands("cookies");
+																			  } else if (cookies === true) {
+																						var msg = "You alrwady have the cookies.";
+																						updateDisplay(msg);
+																					 }
+																			 break;
+			case "pay" : case "pay for cookies" : if (payment === false) { 
+													special_commands("pay");
+												  } else if (payment === true) {
+															var msg = "You already paid.";
+															updateDisplay(msg);
+														 }
+												 break;
+			case "eat" : case "eat cookies" : case "Om Nom Nom" : special_commands("eat");
+																  break;
+			case "down" : case "Down" : case "go in cave" : case "Go in cave" : climb_down();
+																			    break;
+			case "up" : case "Up" : case "Leave cave" : case "leave cave" : climb_up();
+																		    break;																  
+			case "dance battle"  : case "fight ninjas" : case "Dance" : special_commands("battle");
+																	   break;
+			case "Enter portal" : case "enter portal" : special_commands("Portal");
+													   break;
+			case "Read stone" : case "read stone" : case "read writing" : case "Read writing" : special_commands("ReadStone");
+																							  break;
+			case "play with dog" : special_commands("dog");  break; // These are all
+			case "take a leak"   : special_commands("pee");  break; // useless commands
+			case "get funky"     : special_commands("funk"); break; // They are for fun
+			case "inventory"     : inventory();              break; // Not necessary for game-play
+			default : var msg = "Pardon?"
+					  updateDisplay(msg);
+				      break;
+		}
+  	}
+}
+function special_commands(object) {
+	switch(object){
+		case "keys" 	: if (userlocation === "Kitchen") {
+							keys = true;
+							msg = "You grab the keys and put them in your pocket";
+						  } else if (userlocation !== "Kitchen") {
+							keys = false;
+							var msg = "What keys?"
 							}
-							break;
-		case "SisterRoom"   : var msg = "You're in your sisters room. You might want to leave soon before she hurts you."
-							updateDisplay(msg);
-							document.getElementById("btnNorth").style.visibility="hidden";
-							document.getElementById("btnSouth").style.visibility="hidden";
-							document.getElementById("btnEast").style.visibility="visible";
-							document.getElementById("btnWest").style.visibility="hidden";
-							if (scrSisterRoom === false) {
-								scrSisterRoom = true;
-								score = score + 5;
+						  updateDisplay(msg);
+						  break;
+		case "chores" 	: if (userlocation === "bedroom") {
+							chores = true;
+							var msg = "You tidy up your room and kill the grue that took up residence under your bed and you also find a few bucks in the grue's cave and a small passage way... Hmm.."
+						  } else {
+						      var msg = "There are no chores to be done in here."
+						    }
+						updateDisplay(msg);
+						break;
+		case "money"  	: if ((userlocation === "bedroom")&&(chores === true)) {
+							money = true;
+							var msg = "You take the 5 bucks and stash it in your pocket."
+						  } else {
+							  var msg = "The streets aren't actually paved with gold..."
+						    }
+						updateDisplay(msg);
+						break;
+		case "cookies"	: if ((userlocation === "Shelves") && (money === true)) {
+							cookies = true;
+							var msg = "You take your favorite cookies from the shelf, you should go pay.";
+						  } else if ((userlocation === "Shelves") && (money === false)) {
+									cookies = false;
+									var msg = "You have the cookies but you don't have any money so you put them back."
+								 } else {
+									  var msg = "What cookies...?";
+								   }
+						  updateDisplay(msg);
+						  break;
+		case "pay"		: if ((userlocation === "Register") && (cookies === true) && (money === true)) {
+							payment = true;
+							var msg = "You pay for the cookies!"
+						  } else if ((cookies === true) && (money === true) && (userlocation !== "Register")) {
+								var msg = "You can't pay for that here"
+							} else if ((userlocation === "Register") && (money === true) && (cookies === false)) {
+									  var msg = "What exactly are you paying for?"
+								   }
+						updateDisplay(msg)
+						break;
+		case "eat"		: if (cookies === true) {
+							var msg = "Victory cookies... Om Nom NOM NOM NOM NOM !"
+							gameWinFunction();
+						  } else {
+								var msg = "Eat what?"
 							}
-							break;
-		case "BathroomA"    : var msg = "You are in the bathroom. Your sister's stuff is everywhere."
-							updateDisplay(msg);
-							document.getElementById("btnNorth").style.visibility="hidden";
-							document.getElementById("btnSouth").style.visibility="hidden";
-							document.getElementById("btnEast").style.visibility="hidden";
-							document.getElementById("btnWest").style.visibility="visible";
-							if (scrBathroomA === false) {
-								scrBathroomA = true;
-								score = score + 5;
+						updateDisplay(msg)
+						break;
+		case "dog"		: if (userlocation === "FrontLawn") {
+							var msg = "You play fetch with your dog until she is too tired to keep playing."
+						  } else {
+							  var msg = "You can't find her anywhere :("
+						    }
+						updateDisplay(msg);
+						break;
+		case "pee"		: if ((userlocation === "BathroomA") || (userlocation === "BathroomB")) {
+							var msg = "How refreshing..."
+						  } else {
+							  var msg = "... How barbaric..."
 							}
-							break;
-		case "HallwayB"     : var msg = "You are at the end of the hallway near the kitchen."
-							updateDisplay(msg);
-							document.getElementById("btnNorth").style.visibility="visible";
-							document.getElementById("btnSouth").style.visibility="visible";
-							document.getElementById("btnEast").style.visibility="hidden";
-							document.getElementById("btnWest").style.visibility="visible";
-							if (scrHallwayB === false) {
-								scrHallwayB = true;
-								score = score + 5;
-							}
-							break;
-		case "LivingRoom"   : var msg = "You are in the living room at the front of the house."
-							updateDisplay(msg);
-							document.getElementById("btnNorth").style.visibility="hidden";
-							document.getElementById("btnSouth").style.visibility="hidden";
-							document.getElementById("btnEast").style.visibility="visible";
-							document.getElementById("btnWest").style.visibility="visible";
-							if (scrLivingRoom === false) {
-								scrLivingRoom = true;
-								score = score + 5;
-							}
-							break;
-		case "FrontLawn"    : var msg = "You are in the front lawn, your dog is running around with a frisbee."
-							updateDisplay(msg);
-							document.getElementById("btnNorth").style.visibility="hidden";
-							document.getElementById("btnSouth").style.visibility="hidden";
-							document.getElementById("btnEast").style.visibility="visible";
-							document.getElementById("btnWest").style.visibility="hidden";
-							if (scrFrontLawn === false) {
-								scrFrontLawn = true;
-								score = score + 5;
-							}
-							break;
-		case "Kitchen"      : var msg = "You are in the kitchen. The car keys are on the counter next to the microwave."
-							updateDisplay(msg);
-							document.getElementById("btnNorth").style.visibility="Visible";
-							document.getElementById("btnSouth").style.visibility="visible";
-							document.getElementById("btnEast").style.visibility="visible";
-							document.getElementById("btnWest").style.visibility="visible"; 
-							if (scrKitchen === false) {
-								scrKitchen = true;
-								score = score + 5;
-							}
-							break;
-		case "Nook"          : var msg = "You are in the breakfast nook right next to the kitchen."
-							updateDisplay(msg);
-							document.getElementById("btnNorth").style.visibility="hidden";
-							document.getElementById("btnSouth").style.visibility="hidden";
-							document.getElementById("btnEast").style.visibility="Visible";
-							document.getElementById("btnWest").style.visibility="hidden"; 
-							if (scrNook === false) {
-								scrNook = true;
-								score = score + 5;
-							}
-							break;
-		case "DinningRoom"  : var msg = "You are in the dinning room."
-							updateDisplay(msg);
-							document.getElementById("btnNorth").style.visibility="Visible";
-							document.getElementById("btnSouth").style.visibility="hidden";
-							document.getElementById("btnEast").style.visibility="visible";
-							document.getElementById("btnWest").style.visibility="visible"; 
-							if (scrDinningRoom === false) {
-								scrDinningRoom = true;
-								score = score + 5;
-							}
-							break;
-		case "DadsOffice"   : var msg = "You are in your dad's office. Your dad is at his desk working away."
-							updateDisplay(msg);
-							document.getElementById("btnNorth").style.visibility="hidden";
-							document.getElementById("btnSouth").style.visibility="hidden";
-							document.getElementById("btnEast").style.visibility="hidden";
-							document.getElementById("btnWest").style.visibility="visible";
-							if (scrDadsOffice === false) {
-								scrDadsOffice = true;
-								score = score + 5;
-							}
-							break;
-		case "HallwayC"     : var msg = "You are in the hallway just outside of your parents room."
-							updateDisplay(msg);
-							document.getElementById("btnNorth").style.visibility="hidden";
-							document.getElementById("btnSouth").style.visibility="visible";
-							document.getElementById("btnEast").style.visibility="visible";
-							document.getElementById("btnWest").style.visibility="hidden";
-							if (scrHallwayC === false) {
-								scrHallwayC = true;
-								score = score + 5;
-							}
-							break;
-		case "ParentsRoom"  : 
-							if (chores === false) {
-							var msg = "You are in your parents' room. Your mother is hounding you to clean the kitchen."
-							updateDisplay(msg);
-							} else if (chores === true) {
-									  var msg = "You are in your parents' room."
-									  updateDisplay(msg);
-								   } else {
-										var msg = "This should never happen."
-									 }
-							document.getElementById("btnNorth").style.visibility="hidden";
-							document.getElementById("btnSouth").style.visibility="hidden";
-							document.getElementById("btnEast").style.visibility="visible";
-							document.getElementById("btnWest").style.visibility="visible";
-							if (scrParentsRoom === false) {
-								scrParentsRoom = true;
-								score = score + 5;
-							}
-							break;
-		case "BathroomB"    : var msg = "You are in your parents' bathroom."
-							updateDisplay(msg);
-							document.getElementById("btnNorth").style.visibility="hidden";
-							document.getElementById("btnSouth").style.visibility="hidden";
-							document.getElementById("btnEast").style.visibility="hidden";
-							document.getElementById("btnWest").style.visibility="visible";
-							if (scrBathroomB === false) {
-								scrBathroomB = true;
-								score = score + 5;
-							}
-							break;
-		case "SideYard"     : var msg = "You are in the side yard. The garage is just to the south."
-							updateDisplay(msg);
-							document.getElementById("btnNorth").style.visibility="Visible";
-							document.getElementById("btnSouth").style.visibility="Visible";
-							document.getElementById("btnEast").style.visibility="hidden";
-							document.getElementById("btnWest").style.visibility="hidden";
-							if (scrSideYard === false) {
-								scrSideYard = true;
-								score = score + 5;
-							}
-							break;
-		case "Garage"       : var msg = "You are in the garage. Your dad's car is there amongst all of the clutter."
-							updateDisplay(msg);
-							if ((keys === true) && (chores === true)) {
-								document.getElementById("btnNorth").style.visibility="visible";
-								document.getElementById("btnSouth").style.visibility="visible";
-								document.getElementById("btnEast").style.visibility="hidden";
-								document.getElementById("btnWest").style.visibility="hidden";
-							} else {
-						       document.getElementById("btnNorth").style.visibility="visible";
-							   document.getElementById("btnSouth").style.visibility="hidden";
-							   document.getElementById("btnEast").style.visibility="hidden";
-							   document.getElementById("btnWest").style.visibility="hidden";
-							  }
-							if (scrGarage === false) {
-								scrGarage = true;
-								score = score + 5;
-							}
-							break;
-		case "Store_House"  : var msg = "You are at the store to get some cookies!"
-							updateDisplay(msg);
-							document.getElementById("btnNorth").style.visibility="visible";
-							document.getElementById("btnSouth").style.visibility="visible";
-							document.getElementById("btnEast").style.visibility="visible";
-							document.getElementById("btnWest").style.visibility="hidden";
-							if (scrStore === false) {
-								scrStore = true;
-								score = score + 5;
-							}
-							break;
-		case "Store_Regis"   : var msg = "You are back at the front of the store."
-							updateDisplay(msg);
-							document.getElementById("btnNorth").style.visibility="visible";
-							document.getElementById("btnSouth").style.visibility="visible";
-							document.getElementById("btnEast").style.visibility="visible";
-							document.getElementById("btnWest").style.visibility="hidden";
-							break;
-		case "Register"     : var msg = "You approach the register."
-							updateDisplay(msg);
-							document.getElementById("btnNorth").style.visibility="visible";
-							document.getElementById("btnSouth").style.visibility="hidden";
-							document.getElementById("btnEast").style.visibility="hidden";
-							document.getElementById("btnWest").style.visibility="hidden";
-							if (scrRegister === false) {
-								scrRegister = true;
-								score = score + 5;
-							}
-							break;
-		case "Shelves"      : var msg = "You look through the shelves and find some cookies!"
-							updateDisplay(msg);
-							document.getElementById("btnNorth").style.visibility="hidden";
-							document.getElementById("btnSouth").style.visibility="hidden";
-							document.getElementById("btnEast").style.visibility="hidden";
-							document.getElementById("btnWest").style.visibility="visible";
-							if (scrShelves === false) {
-								scrShelves = true;
-								score = score + 5;
-							}
-							break
-		case "NinjaDen"     : var msg = "You crawl under your bed to find a secret den of evil ice ninjas who are also above average dancers."
-							updateDisplay(msg);
-							document.getElementById("btnNorth").style.visibility="hidden";
-							document.getElementById("btnSouth").style.visibility="hidden";
-							document.getElementById("btnEast").style.visibility="hidden";
-							document.getElementById("btnWest").style.visibility="hidden";
-							break;
-		default             : var msg = "There is an error in room_switch();"
-							updateDisplay(msg);
-							break;
+						updateDisplay(msg);
+						break;
+		case "funk"	: var msg = "Play that funky music white boy!"
+						updateDisplay(msg);
+						break;
+		case "battle"   : if (dancebattle === false){
+						     dancebattle = true;
+						 	 score = score + 5;
+						 	 var msg = "You and the ninjas have a furious dance battle. The ninjas do flips, you do splits, the najas do the cha cha, you spin on your head. You have proven to be too much for the ninjas... You may now leave.";
+						  } else if (dancebattle === true) {
+								    var msg = "They are ninjas just leave while you can."
+							     }
+						updateDisplay(msg);
+						break;
+		case "Portal" : userlocation = "Woods";
+						room_switch("Woods");
+		case "ReadStone" : if (userlocation === "Clearing") {
+						   	  var msg = "You read the writing on the stone outloud, Oooba Dooba Hooba Fooba Gooba Nooba here comes a Giant Barking Toad... A sword appears in your hands and the ground begins to rumble.. All of a sudden a gigantic toad appears and starts barking at you. The two of you fight furiously and relentlessly but the toad wins."
+						   	  userBreathing = false;
+						   	  updateDisplay(msg);
+		 				   } else {
+		 				   		var msg = "There is no stone here."
+		 				     }
 	}
-}    
+}
+function score_request() {
+	var msg = "Your current score is: " + score + " points";
+	updateDisplay(msg);
+}
+function user_help() {
+	var msg = "The valid inputs are: N, n, North, north, or the equiv. for the other directions, take (an object), do (an action), enter, fight, 3score, and help.";
+	updateDisplay(msg);
+}
+function inventory() {
+	if (keys === true) {
+		var item1 = " The keys to your dad's car" + "\n";
+	} else {
+			item1 = "";
+		}
+	if (money === true) {
+		var item2 = " Some money"+ "\n";
+	} else {
+			item2 = "";
+		}	
+	if (cookies === true) {
+		var item3 = " A package of cookies" + "\n";
+	} else {
+			item3 = "";
+		}
+	if (payment === true) {
+		var item4 = "A receipt";
+	} else {
+			item4 = "";
+		}
+	if ((keys === false) && (money===false) && (cookies===false) && (payment===false)){
+		var item1 = " nothing"
+	}
+	var msg = "Inventory: " + item1 + item2 + item3 + item4
+	updateDisplay(msg);
+}
 function walk_north() {
+	userMoves = userMoves + 1;
 	switch(userlocation) {
 		case "HallwayA" 	: userlocation = "bedroom";
 							room_switch("bedroom");
@@ -308,11 +278,18 @@ function walk_north() {
 		case "Register"     : userlocation = "Store_Regis";
 							room_switch("Store_Regis");
 							break;
+		case "NinjaDen"     : userlocation = "PortalRoom";
+							room_switch("PortalRoom");
+							break;
+		case "Woods"		: userlocation = "Clearing";
+							room_switch("Clearing");
+							break;
 		default : var msg = "You cannot go that way silly!"
 				updateDisplay(msg);
 	}
 }
 function walk_south() {
+	userMoves = userMoves + 1;
 	switch(userlocation) {
 		case "bedroom"      : userlocation = "HallwayA";
 							room_switch("HallwayA");
@@ -346,11 +323,15 @@ function walk_south() {
 		case "HallwayC"     : userlocation = "DinningRoom";
 							room_switch("DinningRoom");
 							break;
+		case "PortalRoom"   : userlocation = "NinjaDen";
+							room_switch("NinjaDen");
+							break;
 		default             : var msg = "You cannot go that way silly!"
 							updateDisplay(msg);
 	}
 }
 function walk_east() {
+	userMoves = userMoves + 1;
 	switch(userlocation) {
 		case "SisterRoom"       : userlocation = "HallwayA";
 								room_switch("HallwayA");
@@ -390,6 +371,7 @@ function walk_east() {
 	}
 }
 function walk_west() {
+	userMoves = userMoves + 1;
 	switch(userlocation) {
 		case "BathroomA"        : userlocation = "HallwayA";
 								room_switch("HallwayA");
@@ -426,16 +408,19 @@ function walk_west() {
 	}
 }
 function climb_up() {
-	if (userlocation === "NinjaDen") {
+	if ((userlocation === "NinjaDen") && (dancebattle === true)) {
 		userlocation = "bedroom";
 		room_switch("bedroom");
-	} else {
+	} else if (userlocation !== "NinjaDen") {
 		var msg = "There is no where to climb.";
 		updateDisplay(msg);
-	  }
+	  } else if ((dancebattle !== true) && (userlocation === "NinjaDen")) {
+	  			var msg = "The dancing ninjas wont let you escape, they want to battle!";
+	  			updateDisplay(msg);
+	 		}	
 }
 function climb_down() {
-	if (userlocation === "bedroom") {
+	if ((userlocation === "bedroom") && (chores === true)) {
 		userlocation = "NinjaDen";
 		room_switch("NinjaDen");
 	} else {
@@ -443,201 +428,11 @@ function climb_down() {
 	  updateDisplay(msg);
 	  }
 }
-function updateDisplay(msg) {
-	var display = document.getElementById("taGame");
-	display.value = msg + '\n' + display.value
-}
-function score_request() {
-	var msg = "Your current score is: " + score + " points";
-	updateDisplay(msg);
-}
-function user_help() {
-	var msg = "The valid inputs are: N, n, North, north, or the equiv. for the other directions, take (an object), do (an action), score, and help.";
-	updateDisplay(msg);
-}
-function btn_do_action_click(command) {
-	var command = document.getElementById("taGameInput");
-	switch(command.value) {
-		case "N"    : case "n"    : case "North": case "north": walk_north();
-															  break;
-		case "S"    : case "s"    : case "South": case "south": walk_south();
-															  break;
-		case "E"    : case "e"    : case "East" : case "east" :walk_east();
-															  break;
-		case "W"    : case "w"    : case "West" : case "west" :walk_west();
-															  break;
-		case "score"     : var msg = "Your current score is: " + score + " points";
-					      updateDisplay(msg);
-					      break;
-		case "help"      : case "Help" : case "I need help" : case "i need help" : case "help me" : user_help();
-													                                               break;
-		case "take keys"  : case "Take keys" : if (keys === true) {
-												  var msg = "You already have them";
-       											  updateDisplay(msg);
-											   } else if (keys === false); {
-														special_commands("keys");
-													  }
-											 break;
-		case "do chores"  : case "clean room" : case "clean up" : if (chores === false) { 
-																	 special_commands("chores");
-																  } else if (chores === false) {
-																			var msg = "Your room is already clean";
-																			updateDisplay(msg);
-																		 }
-						                                        break;
-		case "take money" : case "take cash" : case "Take money" : case "Take cash" : if (money === false ) {
-																						special_commands("money");
-																					  } else if (money === true) {
-																								var msg = "You already have the money."
-																							 }
-																					break;
-		case "take cookies" : case "find cookies" : case "grab cookies" : if (cookies === false) { 
-																			special_commands("cookies");
-																		  } else if (cookies === true) {
-																					var msg = "You alrwady have the cookies.";
-																					updateDisplay(msg);
-																				 }
-																		break;
-		case "pay" : case "pay for cookies" : if (payment === false) { 
-												special_commands("pay");
-											  } else if (payment === true) {
-														var msg = "You already paid.";
-														updateDisplay(msg);
-													 }
-											break;
-		case "eat" : case "eat cookies" : case "Om Nom Nom" : special_commands("eat");
-															break;
-		case "down" : case "Down" : case "go in cave" : case "Go in cave" : climb_down();
-																		  break;
-		case "up" : case "Up" : case "Leave cave" : case "leave cave" : climb_up();
-																		  break;																  
-		case "play with dog" : special_commands("dog");
-							 break;
-		case "take a leak"   : special_commands("pee");
-						     break;
-		case "get funky"     : special_commands("dance");
-						     break;
-		case "inventory"     : inventory();
-							 break;
-		default : var msg = "Pardon?"
-				updateDisplay(msg);
-				break;
-	}
-}
-function inventory() {
-	if (keys === true) {
-		var item1 = " The keys to your dad's car" + "\n";
+function enter_portal() {
+	if (userlocation === "PortalRoom") {
+		userlocation = "Woods";
+		room_switch("Woods");
 	} else {
-			item1 = "";
-		}
-	if (money === true) {
-		var item2 = " Some money"+ "\n";
-	} else {
-			item2 = "";
-		}	
-	if (cookies === true) {
-		var item3 = " A package of cookies" + "\n";
-	} else {
-			item3 = "";
-		}
-	if (payment === true) {
-		var item4 = "A reciept";
-	} else {
-			item4 = "";
-		}
-	if ((keys === false) && (money===false) && (cookies===false) && (payment===false)){
-		var item1 = " nothing"
-	}
-	var msg = "Inventory: " + item1 + item2 + item3 + item4
-	updateDisplay(msg);
+		var msg = "There is no portal to enter... Crazy.."
+      }
 }
-function loadMap() {
-	var map = "O" + "\n" + "|" + "\n" + "O-O-O" + "\n" + "|"+ "\n"  + "     O-O-O  O-O-O" + "\n" + "    |   |" + "\n" + "   O-O-O-O" + "\n" + "|" + "\n" + "O" + "\n" + "|" + "\n" + "O" + "\n" + "|" + "\n" + "." + "\n" + "." + "\n" + "." + "\n" + "|" + "\n" + "    O-O" + "\n" + "|" + "\n" + "O" 
-	mapdisplay = document.getElementById("taGameMap");
-	mapdisplay.value = map;
-}
-
-function init() {
-	var msg = "You wake up in your bedroom with the hankering for some cookies. And by the way your room is looking a little bit messy, you might want to do your chores sometime or else your parents might get mad."
-	updateDisplay(msg);
-	document.getElementById("btnNorth").style.visibility="hidden";
-	document.getElementById("btnSouth").style.visibility="visible";
-	document.getElementById("btnEast").style.visibility="hidden";
-	document.getElementById("btnWest").style.visibility="hidden";
-	loadMap();
-}
-function special_commands(object) {
-	switch(object){
-		case "keys" 	: if (userlocation === "Kitchen") {
-							keys = true;
-							msg = "You grab the keys and put them in your pocket";
-						  } else if (userlocation !== "Kitchen") {
-							keys = false;
-							var msg = "What keys?"
-							}
-						  updateDisplay(msg);
-						  break;
-		case "chores" 	: if (userlocation === "bedroom") {
-							chores = true;
-							var msg = "You tidy up your room and kill the grue that took up residence under your bed and you also find a few bucks in the grue's cave."
-						  } else {
-						      var msg = "There are no chores to be done in here."
-						    }
-						updateDisplay(msg);
-						break;
-		case "money"  	: if ((userlocation === "bedroom")&&(chores === true)) {
-							money = true;
-							var msg = "You take the 5 bucks and stash it in your pocket."
-						  } else {
-							  var msg = "The streets aren't actually paved with gold..."
-						    }
-						updateDisplay(msg);
-						break;
-		case "cookies"	: if ((userlocation === "Shelves") && (money === true)) {
-							cookies = true;
-							var msg = "You take your favorite cookies from the shelf, you should go pay.";
-						  } else if ((userlocation === "Shelves") && (money === false)) {
-									cookies = false;
-									var msg = "You have the cookies but you don't have any money so you put them back."
-								 } else {
-									  var msg = "What cookies...?";
-								   }
-						  updateDisplay(msg);
-						  break;
-		case "pay"		: if ((userlocation === "Register") && (cookies === true) && (money === true)) {
-							payment = true;
-							var msg = "You pay for the cookies!"
-						  } else if ((cookies === true) && (money === true) && (userlocation !== "Register")) {
-								var msg = "You can't pay for that here"
-							} else if ((userlocation === "Register") && (money === true) && (cookies === false)) {
-									  var msg = "What exactly are you paying for?"
-								   }
-						updateDisplay(msg)
-						break;
-		case "eat"		: if (cookies === true) {
-							var msg = "Victory cookies... Om Nom NOM NOM NOM NOM !"
-						  } else {
-								var msg = "Eat what?"
-							}
-						updateDisplay(msg)
-						break;
-		case "dog"		: if (userlocation === "FrontLawn") {
-							var msg = "You play frisbee with your dog until she is too tired to keep playing."
-						  } else {
-							  var msg = "You can't find her anywhere :("
-						    }
-						updateDisplay(msg);
-						break;
-		case "pee"		: if ((userlocation === "BathroomA") || (userlocation === "BathroomB")) {
-							var msg = "How refreshing..."
-						  } else {
-							  var msg = "... How barbaric..."
-							}
-						updateDisplay(msg);
-						break;
-		case "dance"	: var msg = "Play that funky music white boy!"
-						updateDisplay(msg);
-						break;
-	}
-}
-
