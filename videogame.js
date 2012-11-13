@@ -28,6 +28,8 @@ var cookies         = false; // to take the cookies off of the shelf
 var payment         = false; // to pay for the cookies
 var dancebattle     = false; // to escape from the ninja den guarded by the grue
 var userBreathing   = true;  // has the user been eaten by anything yet?
+var inventory       = new Array(); // initialize the inventory array
+
 
 function updateDisplay(msg) {
 	var display = document.getElementById("taGame");
@@ -113,6 +115,8 @@ function btn_do_action_click(command) {
 													   break;
 			case "Read stone" : case "read stone" : case "read writing" : case "Read writing" : special_commands("ReadStone");
 																							  break;
+			case "fight toad" : case "Fight toad" : special_commands("toad battle");
+			case "run away" : case "flee" : special_commands("run from toad");
 			case "play with dog" : special_commands("dog");  break; // These are all
 			case "take a leak"   : special_commands("pee");  break; // useless commands
 			case "get funky"     : special_commands("funk"); break; // They are for fun
@@ -126,7 +130,7 @@ function btn_do_action_click(command) {
 function special_commands(object) {
 	switch(object){
 		case "keys" 	: if (userlocation === "Kitchen") {
-							keys = true;
+							var inventory[inventory.length] = "keys"
 							msg = "You grab the keys and put them in your pocket";
 						  } else if (userlocation !== "Kitchen") {
 							keys = false;
@@ -143,7 +147,7 @@ function special_commands(object) {
 						updateDisplay(msg);
 						break;
 		case "money"  	: if ((userlocation === "bedroom")&&(chores === true)) {
-							money = true;
+							var inventory[inventory.length] = "money" 
 							var msg = "You take the 5 bucks and stash it in your pocket."
 						  } else {
 							  var msg = "The streets aren't actually paved with gold..."
@@ -151,7 +155,7 @@ function special_commands(object) {
 						updateDisplay(msg);
 						break;
 		case "cookies"	: if ((userlocation === "Shelves") && (money === true)) {
-							cookies = true;
+							var inventory[inventory.length] = "cookies"
 							var msg = "You take your favorite cookies from the shelf, you should go pay.";
 						  } else if ((userlocation === "Shelves") && (money === false)) {
 									cookies = false;
@@ -207,13 +211,33 @@ function special_commands(object) {
 						break;
 		case "Portal" : userlocation = "Woods";
 						room_switch("Woods");
+						break;
 		case "ReadStone" : if (userlocation === "Clearing") {
-						   	  var msg = "You read the writing on the stone outloud, Oooba Dooba Hooba Fooba Gooba Nooba here comes a Giant Barking Toad... A sword appears in your hands and the ground begins to rumble.. All of a sudden a gigantic toad appears and starts barking at you. The two of you fight furiously and relentlessly but the toad wins."
-						   	  userBreathing = false;
+						   	  var msg = "You read the writing on the stone outloud, Oooba Dooba Hooba Fooba Gooba Nooba here comes a Giant Barking Toad... A sword appears in your hands and the ground begins to rumble.. All of a sudden a gigantic toad appears and starts barking at you as a way of challenging you to a fight to the death."
 						   	  updateDisplay(msg);
 		 				   } else {
 		 				   		var msg = "There is no stone here."
 		 				     }
+		 				  break;
+		case "toad battle" : if (userlocation === "Clearing") {
+							 	var msg = "You fight the toad and chop off his gigantic toadly head. You close your eyes and rejoice in victory." + "\n" + "\n" + "* * *" + "\n" + "\n" + "You open your eyes and you are back in your room.";
+							    updateDisplay(msg);
+							    userlocation = "bedroom";
+							    var inventory[inventory.length] = "sword of the giant barking toad";
+							 } else if (userlocation !== "Clearing") {
+							 			var msg = "There's nothing to fight here";
+							 			updateDisplay(msg);
+							 		}
+							break;
+		case "run from toad" : if (userlocation === "Clearing") {
+							       var msg = "You try to drop the sword and flee, frantically running for your life, but the toad jumps on you and eats you.";
+							       updateDisplay(msg);
+							       userlocation = "Heaven";
+							   } else if (userlocation !== "Clearing") {
+							   		      var msg = "There is nothing to run away from."
+							   		      updateDisplay(msg);
+							   		  }
+							  break;
 	}
 }
 function score_request() {
