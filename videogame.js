@@ -28,8 +28,6 @@ var cookies         = false; // to take the cookies off of the shelf
 var payment         = false; // to pay for the cookies
 var dancebattle     = false; // to escape from the ninja den guarded by the grue
 var userBreathing   = true;  // has the user been eaten by anything yet?
-var inventory       = new Array(); // initialize the inventory array
-
 
 function updateDisplay(msg) {
 	var display = document.getElementById("taGame");
@@ -130,7 +128,7 @@ function btn_do_action_click(command) {
 function special_commands(object) {
 	switch(object){
 		case "keys" 	: if (userlocation === "Kitchen") {
-							var inventory[inventory.length] = "keys"
+							var keys = true;
 							msg = "You grab the keys and put them in your pocket";
 						  } else if (userlocation !== "Kitchen") {
 							keys = false;
@@ -147,7 +145,7 @@ function special_commands(object) {
 						updateDisplay(msg);
 						break;
 		case "money"  	: if ((userlocation === "bedroom")&&(chores === true)) {
-							var inventory[inventory.length] = "money" 
+							var money = true;
 							var msg = "You take the 5 bucks and stash it in your pocket."
 						  } else {
 							  var msg = "The streets aren't actually paved with gold..."
@@ -155,7 +153,7 @@ function special_commands(object) {
 						updateDisplay(msg);
 						break;
 		case "cookies"	: if ((userlocation === "Shelves") && (money === true)) {
-							var inventory[inventory.length] = "cookies"
+							var cookies = true;
 							var msg = "You take your favorite cookies from the shelf, you should go pay.";
 						  } else if ((userlocation === "Shelves") && (money === false)) {
 									cookies = false;
@@ -223,7 +221,6 @@ function special_commands(object) {
 							 	var msg = "You fight the toad and chop off his gigantic toadly head. You close your eyes and rejoice in victory." + "\n" + "\n" + "* * *" + "\n" + "\n" + "You open your eyes and you are back in your room.";
 							    updateDisplay(msg);
 							    userlocation = "bedroom";
-							    var inventory[inventory.length] = "sword of the giant barking toad";
 							 } else if (userlocation !== "Clearing") {
 							 			var msg = "There's nothing to fight here";
 							 			updateDisplay(msg);
