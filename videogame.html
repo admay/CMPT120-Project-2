@@ -6,32 +6,36 @@
     <link rel="stylesheet" href="videogame.css" type="text/css" media="screen" />
   </head>
   <body onload="init();" class="body">
-    <script type="text/javascript" src="videogame.js"></script>
-    <script type="text/javascript" src="button.js"></script>
-    <script type="text/javascript" src="location.js"></script>
+    <script type="text/javascript" src="videogame.js">    </script> <!-- Game Logic -->
+    <script type="text/javascript" src="NewLocation.js">  </script> <!-- Location -->
+    <script type="text/javascript" src="Movement.js">     </script> <!-- Movement -->
+    <script type="text/javascript" src="NewItem.js">      </script> <!-- Items -->
+    <script type="text/javascript" src="button.js">       </script> <!-- Buttons -->
+    <!-- <script type="text/javascript" src="button.js"></script> --> <!-- Button Changer -->
     <b>Video Game! CHYEAH!!<b>
     <p>
       Welcome to video game Operation Cookie. The game about getting cookies.</p>
     </p>
-      <textarea id="taGame" class="taGame">
-      </textarea>
-      <textarea id="taGameMap" class="taGameMap">
-      </textarea>
+      <textarea id="taGame" class="taGame"></textarea>
+      <img class="GameMap" src="GameMap.png" alt="Game Map">
     <p>
       <input type = "text" id = "taGameInput" class="Input" autocomplete="off">
       <input type = "button" value = "Do Action!" onclick = "btn_do_action_click();" class="BtnStyleTwo">
     </p>
     <p>
-      <input type="button" value="North" onclick="walk_north();"    id="btnNorth" class="BtnStyleOne">
-      <input type="button" value="South" onclick="walk_south();"    id="btnSouth" class="BtnStyleOne">
-      <input type="button" value="West"  onclick="walk_west();"     id="btnWest"  class="BtnStyleOne">
-      <input type="button" value="East"  onclick="walk_east();"     id="btnEast"  class="BtnStyleOne">
-      <input type="button" value="Score" onclick="score_request();" id="btnScore" class="BtnStyleOne"> 
+      <!-- Buttons for movement -->
+      <input type="button" value="North" onclick="move_north();"    id="btnNorth" class="BtnStyleOne">
+      <input type="button" value="South" onclick="move_south();"    id="btnSouth" class="BtnStyleOne">
+      <input type="button" value="East"  onclick="move_east();"     id="btnEast"  class="BtnStyleOne">
+      <input type="button" value="West"  onclick="move_west();"     id="btnWest"  class="BtnStyleOne">
+      <!-- Buttons for specific actions -->
+      <input type="button" value="Take"      onclick="TakeItem();"         class="BtnStyleOne">
+      <input type="button" value="Inventory" onclick="DisplayInventory();" class="BtnStyleTwo">
     </p>
+
     <a class="hyperlinks" href="mailto:mzavarella30@gmail.com">Mail-to link for assistance</a>
     <br>
-    <a class="hyperlinks" href="helppage.html">Help Page. WARNING! Does not open a new page!</a>
-    <br>
     <a class="Hyperlinks" href="http://www.youtube.com/watch?v=h1iJXOUMJpg">For Your Entertainment</a>
+
 	</body>
 </html>
