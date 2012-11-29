@@ -1,8 +1,7 @@
 // Button disabler
 
-function button_switch(userlocation) {
-	var locale = userlocation;
-	switch(locale) {
+function ButtonSwitchFunction() {
+	switch(userlocation) {
 		case 2  :
 		case 6  :
 		case 7  : document.getElementById("btnEast").style.visibility="visible";
@@ -17,8 +16,6 @@ function button_switch(userlocation) {
 			      break;
 		case 0  :
 		case 3  :
-		case 13 :
-		case 18 :
 		case 23 : document.getElementById("btnEast").style.visibility="hidden";
 				  document.getElementById("btnNorth").style.visibility="hidden";
 				  document.getElementById("btnSouth").style.visibility="hidden";
@@ -31,8 +28,7 @@ function button_switch(userlocation) {
 				  document.getElementById("btnSouth").style.visibility="hidden";
 				  document.getElementById("btnWest").style.visibility="visible";
 			      break;
-		case 4  :
-		case 8  : document.getElementById("btnEast").style.visibility="visible";
+		case 4  : document.getElementById("btnEast").style.visibility="visible";
 			 	  document.getElementById("btnNorth").style.visibility="visible";
 				  document.getElementById("btnSouth").style.visibility="visible";
 				  document.getElementById("btnWest").style.visibility="visible";
@@ -43,6 +39,7 @@ function button_switch(userlocation) {
 				  document.getElementById("btnSouth").style.visibility="visible";
 				  document.getElementById("btnWest").style.visibility="hidden";
 			      break;
+		case 8  : 
 		case 11 : document.getElementById("btnEast").style.visibility="visible";
 				  document.getElementById("btnNorth").style.visibility="visible";
 				  document.getElementById("btnSouth").style.visibility="hidden";
@@ -56,8 +53,8 @@ function button_switch(userlocation) {
 			      break;
 		
 		case 19 : document.getElementById("btnEast").style.visibility="hidden";
-				  document.getElementById("btnNorth").style.visibility="hidden";
-				  document.getElementById("btnSouth").style.visibility="visible";
+				  document.getElementById("btnNorth").style.visibility="visible";
+				  document.getElementById("btnSouth").style.visibility="hidden";
 				  document.getElementById("btnWest").style.visibility="hidden";
 			      break;
 
@@ -65,6 +62,12 @@ function button_switch(userlocation) {
 				  document.getElementById("btnNorth").style.visibility="visible";
 				  document.getElementById("btnSouth").style.visibility="hidden";
 				  document.getElementById("btnWest").style.visibility="hidden";
+			      break;
+		case 13 :
+		case 18 : document.getElementById("btnEast").style.visibility="hidden";
+				  document.getElementById("btnNorth").style.visibility="hidden";
+				  document.getElementById("btnSouth").style.visibility="visible";
+				  document.getElementById("btnWest").style.visibility="visible";
 			      break;
 	}
 }
