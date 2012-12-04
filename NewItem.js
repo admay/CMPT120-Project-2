@@ -5,25 +5,18 @@
 function item(item_id, item_name, item_description, item_taken) {
 	this.id 		 = item_id;
 	this.name 		 = item_name;
+	this.taken 		 = item_taken;
 	this.description = item_description;
-	this.taken		 = item_taken;
-
-	if (this.taken === true) {
-		this.description = "";
-	} else {
-			this.description = item_description;
-	}
-
-
 
 	this.toString = function() {
-		var ItemRetVal = ""
-		ItemRetVal = item.name + item.description;
-		return ItemRetVal
+		var ItemRetVal = "";
+		ItemRetVal = item.description;
+		return ItemRetVal;
 	}
 }
 
-function CreateListOfItems() {
+// Creates the list of items that can be taken, once they are taken they are removed from their respective locations.
+function CreateListOfItems(item_id, item_name, item_description, item_taken) {
 	var money 		= new item(money,"5 dollars", "5 dollars are crumpled up behind your bed.",false);
 	var carKeys 	= new item(carKeys,"Your Dad's car keys","Your Dad's car keys on the kitchen counter.",false);
 	var watch		= new item(watch,"Your super cool digital watch","Your super cool digital watch is on the table",false);
@@ -35,60 +28,27 @@ function CreateListOfItems() {
 	ListOfItems[23] = cookies;
 }
 
-function TakeItem() {
-	switch(userlocation) {
-		case 0  : if (ListOfItems[0].taken === false) {
-			 	      ListOfItems[0].taken = true;
-				      Inventory[Inventory.length] = ListOfItems[0].name;
-				      var msg = "You put the money in your inventory.";
-				      updateText(msg);
-				  } else {
-				  	  var msg = "You already have that!";
-				  	  updateText(msg);
-				  } 
-				  break;
-		case 8  : if (ListOfItems[8].taken === false) {
-					  ListOfItems[8].taken = true;
-					  Inventory[Inventory.length] = ListOfItems[8].name;
-					  var msg = "You put the keys in your inventory."
-					  updateText(msg);
-				  } else {
-				  	  var msg = "You already have that!";
-				  	  updateText(msg);
-				  }
-				  break;
-		case 10 : if (ListOfItems[10].taken === false) {
-					  ListOfItems[10].taken = true;
-					  Inventory[Inventory.length] = ListOfItems[10].name;
-					  var msg = "You put your super cool watch in your inventory";
-					  updateText(msg);
-				  } else {
-				  	var msg = "You already have that!";
-				  	updateText(msg);
-				  }
-				  break;
-		case 23 : if (ListOfItems[23].taken === false) {
-					  ListOfItems[23].taken = true;
-					  Inventory[Inventory.length] = ListOfItems[23].name;
-					  var msg = "You put the cookies in your inventory."
-					  updateText(msg);
-				  } else {
-				  	  var msg = "You already have that!";
-				  	  updateText(msg);
-				  }
-				  break;
-		default : var msg = "There is nothing to take."
-				  break;
-	}
+// Take an Item and put it in your inventory function...
+function TakeItem () {
+	if (ListOfLocations[userlocation].item === "" || undefined) {
+		var msg = "There is nothing for you to take here"
+		updateText(msg);
+	} else if (ListOfItems[userlocation].taken === false) {
+			   ListOfItems[userlocation].taken = true;
+			   ListOfLocations[userlocation].item = "";
+			   Inventory[Inventory.length] = ListOfItems[userlocation].name;
+			   var msg = "You take the " + ListOfItems[userlocation].name + " and put it in your inventory";
+			   updateText(msg);
+			}
 }
 
-
+// Display the inventory when the user asks
 function DisplayInventory() {
 	if (Inventory.length > 0) {
 	for (item in Inventory) {
 		updateText(Inventory[item]);
 	}
-	updateText("You currently have: ")
+	updateText("Inventory: ")
 	} else {
 		var msg = "You are holding nothing."
 		updateText(msg);

@@ -10,8 +10,6 @@ function Area(location_id, location_name, location_description, location_item) {
 	// in the given location and which item to display
 	if (location_item === undefined) {
 		this.item = "";
-	} else if (ListOfItems[userlocation].taken === true) {
-			   this.item = "";
 	} else {
 		this.item = location_item;
 	}

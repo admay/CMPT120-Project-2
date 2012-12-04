@@ -1,4 +1,4 @@
-// Button disabler
+// Button disabler for all of the locations
 
 function ButtonSwitchFunction() {
 	switch(userlocation) {

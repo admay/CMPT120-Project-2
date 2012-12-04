@@ -1,66 +1,79 @@
 /* videogame.css */
 
 .body {
-  text-align:left;
+  text-align: left;
   background:url("http://www.grubgrade.com/wp-content/uploads/2009/09/Cookie-Monster-Binge.jpg");
-  background-repeat:no-repeat;
-  background-position:100% 100%;
-  background-color:2B579E;
-  color:white;
-  font-family:calibri,sans-serif;
-  font-size:20;
-  font-weight:bold;
+  background-repeat: no-repeat;
+  background-position: 100% 100%;
+  background-color: 2B579E;
+  color: white;
+  font-family: calibri,sans-serif;
+  font-size: 20pt;
+  font-weight: bold;
 }
 .taGame {
-  text-align:center;
-  width:52%;
-  height:57%;
-  background-color:DAECFF;
-  color:black;
-  font-family:calibri,sans-serif;
-  font-size:16px;
-  font-weight:bold;
+  text-align: center;
+  width: 52%;
+  height: 57%;
+  background-color: DAECFF;
+  color: black;
+  font-family: calibri,sans-serif;
+  font-size: 16px;
+  font-weight: bold;
 }
+/*
+.Inventory {
+  float: left;
+  text-align: center;
+  width: 15%;
+  height: 57%;
+  background-color: DAECFF;
+  color: black;
+  font-family: calibri,sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+}
+*/
 .GameMap {
-  width:20%;
-  height:55.4%;
-  background-color:DAECFF;
-  color:black;
-  font-family:calibri,sans-serif;
-  font-size:15px;
-  font-weight:bold;
+  width: 20%;
+  height: 55.4%;
+  background-color: DAECFF;
+  color: black;
+  font-family: calibri,sans-serif;
+  font-size: 15px;
+  font-weight: bold;
 }
 .Hyperlinks {
-  color:white;
-  font-size:14px;
+  color: white;
+  font-size: 14px;
 }
 .BtnStyleOne {
-  width:50px;
-  height:25px;
-  background-color:DAECFF;
-  border-width:1px;
-  border-color:black;
-  color:black;
-  font-family:calibri,sans-serif;
-  font-weight:bold;
+  width: 50px;
+  height: 25px;
+  background-color: DAECFF;
+  border-width: 1px;
+  border-color: black;
+  color: black;
+  font-family: calibri,sans-serif;
+  font-weight: bold;
 }
 .BtnStyleTwo {
-  width:75px;
-  height:25px;
-  background-color:DAECFF;
-  border-width:1px;
-  border-color:black;
-  color:black;
-  font-family:calibri,sans-serif;
-  font-weight:bold;
+  width: 75px;
+  height: 25px;
+  background-color: DAECFF;
+  border-width: 1px;
+  border-color: black;
+  color: black;
+  font-family: calibri,sans-serif;
+  font-weight: bold;
 }
 .Input {
-  width:52%;
-  height:25px;
-  background-color:DAECFF;
-  border-width:1px;
-  border-color:black;
-  color:black;
-  font-family:calibri,sans-serif;
-  font-weight:bold;
+  width: 52%;
+  height: 25px;
+  background-color: DAECFF;
+  border-width: 1px;
+  border-color: black;
+  color: black;
+  font-family: calibri,sans-serif;
+  font-weight: bold;
 }

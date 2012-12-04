@@ -1,32 +1,25 @@
 // videogame.js
 
+// Global variables to track location, inventory, and arrays
 var usermoves = 0;
 var ListOfLocations = new Array(); // Initialize the game map
+var userlocation = 0; // initialize the user location to the bedroom
 var ListOfItems = new Array(); // Initialize the list of items
 var Inventory = new Array(); // Initialize the user's inventory
-var userlocation = 0; // initialize the user location to the bedroom
-
-// Object Variables
-
-//var carKeys         = false; 
-//var money           = false;
-//var watch			  = false;
-//var cookies         = false; 
 
 // Function that runs on page load
-function init() {
+function gameInit() {
 	ButtonSwitchFunction();
-	var msg = "You wake up in your bedroom with the hankering for some cookies. And by the way your room is looking a little bit messy, you might want to do your chores sometime or else your parents might get mad."
+	var msg = "You wake up in your bedroom with the hankering for some cookies. And by the way your room is looking a little bit messy but you notice that there is a few bucks crumpled up behind your bed."
 	updateText(msg);
 	CreateListOfItems();
 	CreateListOfLocations();
-	
 }
 
 // Updates the text in the text area for the game
 function updateText(msg) {
 	var display = document.getElementById("taGame");
-	display.value = msg + '\n' + display.value + '\n';
+	display.value = msg + "\n" + "\n" + display.value + "\n";
 }
 
 // Run this when the player wins the game
@@ -42,7 +35,7 @@ function btn_do_action_click(command) {
 			case "N"    : 
 			case "n"    : 
 			case "North": 
-			case "north": f(0);
+			case "north": move(0);
 						  break;
 			case "S"    : 
 			case "s"    : 
@@ -78,6 +71,7 @@ function btn_do_action_click(command) {
 		}
 }
 
+// Function to perform actions other then taking items and moving.
 function SpecialCommands(action) {
 	switch(action) {
 		case "pay"  : if ((userlocation === 22) && (cookies === true) && (payment === false)) {
