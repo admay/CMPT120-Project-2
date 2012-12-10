@@ -17,15 +17,37 @@ var GameArea = new Array(
 		 /* 10 */ [-1, -1, 11,  8],
 		 /* 11 */ [14, -1, 12, 10],
 		 /* 12 */ [-1, -1, 13, 11],
-		 /* 13 */ [-1, -1, -1, 12],
+		 /* 13 */ [-1,  9, -1, 12],
 		 /* 14 */ [16, 11, 15, -1],
 		 /* 15 */ [-1, -1, -1, 14],
 		 /* 16 */ [-1, 14, -1, -1],
-		 /* 17 */ [ 9, 18, -1, -1],
-		 /* 18 */ [17, 19, 20, -1],
+		 /* 17 */ [ 9, -1, -1, -1],
+		 /* 18 */ [17, 19, -1, 20],
 		 /* 19 */ [18, -1, -1, -1],
-		 /* 20 */ [-1, -1, -1, 18]
-			    );	
+		 /* 20 */ [-1, -1, 18, -1]
+			             );	
+
+// This is the puzzle portion of the game, the user needs the watch, money, and car keys to leave for the store
+// I just need to figure out how to actually make it work... 
+// Edit: December 7, 2012, 3:14 am by Michael Zavarella... I think it works. Further testing needed
+// Where do i call it from
+function unlockStore2() {
+	if (Inventory.length === 3) {
+		GameArea[17] = [  9, 18, -1, -1];
+	} else {
+		GameArea[17] = [  9, -1, -1, -1];
+	}
+}
+
+// This is the function that prevents the user from going home when they take the cookies
+// but still haven't paid for them
+function lockHome() {
+	if (Inventory.length === 4) {
+		GameArea[18] = [-1, 19, 20, 20];
+	} else {
+		GameArea[18] = [17, 19, -1, 20];
+	}
+}
 
 // Movement function, takes in the desired direction and the users current location, and outputs the new location
 // or the same location if they are not allowed to move in that direction.			
@@ -39,4 +61,5 @@ function move(direction) {
 		var msg = "You can't go that way silly!"
 		updateText(msg);
 	}
+	usermoves = usermoves + 1;
 }

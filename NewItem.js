@@ -25,10 +25,10 @@ function CreateListOfItems(item_id, item_name, item_description, item_taken) {
 	ListOfItems[0]  = money;
 	ListOfItems[8]  = carKeys;
 	ListOfItems[10]	= watch;
-	ListOfItems[23] = cookies;
+	ListOfItems[20] = cookies;
 }
 
-// Take an Item and put it in your inventory function...
+// Take an Item and put it in your inventory...
 function TakeItem () {
 	if (ListOfLocations[userlocation].item === "" || undefined) {
 		var msg = "There is nothing for you to take here"
@@ -40,18 +40,22 @@ function TakeItem () {
 			   var msg = "You take the " + ListOfItems[userlocation].name + " and put it in your inventory";
 			   updateText(msg);
 			}
+	unlockStore2();
+	lockHome();
 }
 
-// Display the inventory when the user asks
-function DisplayInventory() {
+// Display the inventory in the sidebar
+// Major pain in the butt
+function DisplayInventory2() {
+	var InvDisp = document.getElementById("Inventory");
+	InvDisp.value = "";
+	InvDisp.value = "Inventory"
 	if (Inventory.length > 0) {
-	for (item in Inventory) {
-		updateText(Inventory[item]);
-	}
-	updateText("Inventory: ")
+		for (i=0; i<Inventory.length; i++) {
+			UpdateInventoryText(Inventory[i]);
+		} 
 	} else {
-		var msg = "You are holding nothing."
-		updateText(msg);
+		var InvMsg = "You aren't holding anything."
+		UpdateInventoryText(InvMsg);
 	}
-	
 }

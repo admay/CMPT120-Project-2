@@ -4,7 +4,8 @@ function ButtonSwitchFunction() {
 	switch(userlocation) {
 		case 2  :
 		case 6  :
-		case 7  : document.getElementById("btnEast").style.visibility="visible";
+		case 7  :  
+		case 20 : document.getElementById("btnEast").style.visibility="visible";
 				  document.getElementById("btnNorth").style.visibility="hidden";
 				  document.getElementById("btnSouth").style.visibility="hidden";
 				  document.getElementById("btnWest").style.visibility="hidden";
@@ -15,8 +16,8 @@ function ButtonSwitchFunction() {
 				  document.getElementById("btnWest").style.visibility="visible";
 			      break;
 		case 0  :
-		case 3  :
-		case 23 : document.getElementById("btnEast").style.visibility="hidden";
+		case 3  : 
+		case 15 : document.getElementById("btnEast").style.visibility="hidden";
 				  document.getElementById("btnNorth").style.visibility="hidden";
 				  document.getElementById("btnSouth").style.visibility="hidden";
 				  document.getElementById("btnWest").style.visibility="visible";
@@ -33,8 +34,8 @@ function ButtonSwitchFunction() {
 				  document.getElementById("btnSouth").style.visibility="visible";
 				  document.getElementById("btnWest").style.visibility="visible";
 			      break;
-		case 9  :
-		case 20 : document.getElementById("btnEast").style.visibility="hidden";
+		case 9  : 
+		case 17 : document.getElementById("btnEast").style.visibility="hidden";
 				  document.getElementById("btnNorth").style.visibility="visible";
 				  document.getElementById("btnSouth").style.visibility="visible";
 				  document.getElementById("btnWest").style.visibility="hidden";
@@ -45,29 +46,37 @@ function ButtonSwitchFunction() {
 				  document.getElementById("btnSouth").style.visibility="hidden";
 				  document.getElementById("btnWest").style.visibility="visible";
 			      break;
-		case 17 :
-		case 21 : document.getElementById("btnEast").style.visibility="visible";
-				  document.getElementById("btnNorth").style.visibility="visible";
-				  document.getElementById("btnSouth").style.visibility="visible";
-				  document.getElementById("btnWest").style.visibility="hidden";
-			      break;
-		
 		case 19 : document.getElementById("btnEast").style.visibility="hidden";
 				  document.getElementById("btnNorth").style.visibility="visible";
 				  document.getElementById("btnSouth").style.visibility="hidden";
 				  document.getElementById("btnWest").style.visibility="hidden";
 			      break;
-
-		case 22 : document.getElementById("btnEast").style.visibility="hidden";
-				  document.getElementById("btnNorth").style.visibility="visible";
-				  document.getElementById("btnSouth").style.visibility="hidden";
-				  document.getElementById("btnWest").style.visibility="hidden";
-			      break;
-		case 13 :
-		case 18 : document.getElementById("btnEast").style.visibility="hidden";
+		case 13 : document.getElementById("btnEast").style.visibility="hidden";
 				  document.getElementById("btnNorth").style.visibility="hidden";
 				  document.getElementById("btnSouth").style.visibility="visible";
 				  document.getElementById("btnWest").style.visibility="visible";
 			      break;
+		case 18 : document.getElementById("btnEast").style.visibility="hidden";
+				  document.getElementById("btnNorth").style.visibility="visible";
+				  document.getElementById("btnSouth").style.visibility="visible";
+				  document.getElementById("btnWest").style.visibility="visible";
+			      break;
+		case 14 : document.getElementById("btnEast").style.visibility="visible";
+				  document.getElementById("btnNorth").style.visibility="visible";
+				  document.getElementById("btnSouth").style.visibility="visible";
+				  document.getElementById("btnWest").style.visibility="hidden";
+			      break;
+		case 16 : document.getElementById("btnEast").style.visibility="hidden";
+				  document.getElementById("btnNorth").style.visibility="hidden";
+				  document.getElementById("btnSouth").style.visibility="visible";
+				  document.getElementById("btnWest").style.visibility="hidden";
+			      break;
+		case 99 : document.getElementById("btnEast").style.visibility="hidden";
+				  document.getElementById("btnNorth").style.visibility="hidden";
+				  document.getElementById("btnSouth").style.visibility="hidden";
+				  document.getElementById("btnWest").style.visibility="hidden";
+			      break;
 	}
 }
+
+14, 15, 16

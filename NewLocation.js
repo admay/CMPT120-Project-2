@@ -28,7 +28,7 @@ function CreateListOfLocations() {
 	var SistersRoom		= new Area(SistersRoom,"You are in your sisters room, ","there are posters and pictures lining the walls but nothing worth taking.");
 	var BathroomA		= new Area(BathroomA,"You are in the bathroom... ","Do you need to use it? I can leave.");
 	var HallwayB		= new Area(HallwayB,"You are in the southern part of the hallway, ","the walls could use a new coat of paint.");
-	var LivingRoom		= new Area(LivingRoom,"You are in the living room, ","there are couches around the T.V. and the front door stands to the west. ");
+	var LivingRoom		= new Area(LivingRoom,"You are in the living room, ","there are couches around the T.V. and the front door stands to the west.");
 	var FrontLawn		= new Area(FrontLawn,"You are out in front of the house, ","your dog Lexie is running around chasing a squirel.");
 	var Nook			= new Area(Nook,"You are in the breakfast nook just to the west of the kitchen, ","there is a round table with a bunch of clutter on it and a bench that looks just as bad.");
 	var Kitchen			= new Area(Kitchen,"You are in the kitchen, ","your mom is making dinner and the floor could use a little bit of a sweeping. ",ListOfItems[8].description);
@@ -43,8 +43,8 @@ function CreateListOfLocations() {
 	var Garage			= new Area(Garage,"You are in the garage, ","it could probably use a good cleaning but it can wait. Your dad's car is parked amongst the clutter.");
 	var Store			= new Area(Store,"You are in the store, ","there are some shelves to the east with food and such on them and the register to the south.");
 	var Register		= new Area(Register,"You are at the register, ","the cashier doesn't look to happy to be at work.");
-	var StoreShelves	= new Area(StoreShelves,"You are standing in front of a bunch of shelves, ","they are loaded with all sorts of goodies. ",ListOfItems[23].description);
-	
+	var StoreShelves	= new Area(StoreShelves,"You are standing in front of a bunch of shelves, ","they are loaded with all sorts of goodies. ",ListOfItems[20].description);
+
 	// Puts all of the areas into a row vector called ListOfLocations intialized in videogame.js
 	ListOfLocations[0]  = bedroom;
 	ListOfLocations[1]  = HallwayA;
@@ -66,5 +66,5 @@ function CreateListOfLocations() {
 	ListOfLocations[17] = Garage;
 	ListOfLocations[18] = Store;
 	ListOfLocations[19] = Register;
-	ListOfLocations[20] = StoreShelves;
+	ListOfLocations[20] = StoreShelves;	
 }

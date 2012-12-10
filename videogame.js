@@ -16,16 +16,27 @@ function gameInit() {
 	CreateListOfLocations();
 }
 
+// for when the user wants to start a new game and when the user wins
+function refresh() {
+	var taGameArea = document.getElementById("taGame");
+	taGame.value = "";
+	usermoves = 0;
+	//Inventory = new Array();
+	//gameInit();
+}
+
 // Updates the text in the text area for the game
 function updateText(msg) {
 	var display = document.getElementById("taGame");
 	display.value = msg + "\n" + "\n" + display.value + "\n";
 }
 
-// Run this when the player wins the game
-function GameWinFunction() {
-	var msg = "OM NOM NOM NOM NOM !!! CONGRADULATIONS !!! You won the game and in only " + usermoves + " moves!"
-	updateText(msg);
+// Still trying to get this to work but it isn't working out very well
+// The point of this function is to display the inventory updates on the
+// sidebar as opposed to updating the game text area.
+function UpdateInventoryText(InvMsg) {
+	var InventoryDisplay = document.getElementById("Inventory");
+	InventoryDisplay.value = InventoryDisplay.value + "\n" + InvMsg;
 }
 
 // Performs actions based on user input
@@ -52,6 +63,12 @@ function btn_do_action_click(command) {
 			case "West" : 
 			case "west" : move(3);
 						  break;
+			/*case "up"	:
+			case "Up"	: move(4);
+						  break;
+			case "down" :
+			case "Down" : move(5);
+						  break; */
 			case "help" :
 			case "Help" : user_help();
 						  break;
@@ -59,11 +76,11 @@ function btn_do_action_click(command) {
 			case "take" : TakeItem();
 						  break;
 			case "inventory" :
-			case "i"    : DisplayInventory();
+			case "i"    : DisplayInventory2();
 						  break;
-			case "pay"  : SpecialCommands("pay"); //
+			case "pay"  : PayForCookies();
 						  break;
-			case "eat"	: SpecialCommands("eat"); //
+			case "redo"  : refresh();
 						  break;
 			default : var msg = "Pardon?"
 					  updateText(msg);
@@ -71,27 +88,32 @@ function btn_do_action_click(command) {
 		}
 }
 
-// Function to perform actions other then taking items and moving.
-function SpecialCommands(action) {
-	switch(action) {
-		case "pay"  : if ((userlocation === 22) && (cookies === true) && (payment === false)) {
-						  payment = true;
-						  var msg = "You hand over your 5 bucks and officially have your cookies"
-					  } else {
-					  		var msg = "You have nothing to pay for."
-					  }
-					  break;
-		case "eat"  : if (cookies === true) {
-						  GameWinFunction();
-		              } else {
-		              		var msg = "Eat what?"
-		              }
-		              break;
+// Function to pay for the cookies and to win the game
+function PayForCookies() {
+	if ((Inventory.length === 4) && (userlocation === 19)) {
+		var msg = "You hand over the money to the cashier and they ring you up. Before the receipt can even finish printing you scarf down the entire box of cookies. You head home to sleep the stomach ache off. Congradulation cookie musketeer, you have won and in only " + usermoves + " moves."
+		refresh();
+		ButtonSwitchFunction(99);
+	} else if (userlocation !== 19) {
+		var msg = "You can't pay for anything here."
+	} else {
+		var msg = "You have nothing to pay for";
 	}
+	updateText(msg);
 }
 
 // Function to display the short help menu
 function user_help() {
-	var msg = "The valid inputs are: N, n, North, north, or the equiv. for the other directions, take, and help.";
+	var msg = "The valid inputs are: N, n, North, north, or the equiv. for the other directions, up/Up, down/Down, take, pay, inventory, redo, and help.";
 	updateText(msg);
 }
+
+/*
+// Game Guide for if/when you get stuck
+
+The fastest way to get through the game is to take the 5 bucks when the page loads, go west into the hallway,
+south twice into the kitchen and take the keys, east once into the dinning room, take the watch, east 3 more
+times and then go south until you reach the store. Then go west, take the cookies, east to the store front, 
+south to the register and enter the command "pay" then BAM! You win...
+
+*/
